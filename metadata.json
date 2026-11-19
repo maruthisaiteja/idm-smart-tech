@@ -1,0 +1,6 @@
+{
+  "name": "IDM Smart Tech",
+  "description": "IDM Smart Tech is a full-service digital marketing and technology agency helping ambitious businesses generate leads and scale with SEO, paid media, web, mobile apps, CRM/ERP, and AI automation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
