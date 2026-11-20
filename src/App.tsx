@@ -16,6 +16,7 @@ import {
   CLIENT_STRIP_ROW_1,
   CLIENT_STRIP_ROW_2,
   HERO_STATS,
+  LEADERSHIP,
   MISSION_INTRO,
   MISSION_PILLARS,
   SELECTED_WORK,
@@ -28,6 +29,10 @@ import { ConsultationModal } from './components/ConsultationModal';
 import { LegalModal, type LegalTab } from './components/LegalModal';
 import { ScrollCanvas } from './components/ScrollCanvas';
 import { AIAvatarConcierge } from './components/AIAvatarConcierge';
+import { QuickGmbServices } from './components/QuickGmbServices';
+import { AgencyComparison } from './components/AgencyComparison';
+import { GrowthPackages } from './components/GrowthPackages';
+import { FaqAccordion } from './components/FaqAccordion';
 
 export default function App() {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
@@ -82,13 +87,19 @@ export default function App() {
           {/* Zone 2: Navigation Links */}
           <nav
             aria-label="Primary navigation"
-            className="hidden md:flex items-center gap-9 text-[13px] font-normal text-[#5A6577]"
+            className="hidden md:flex items-center gap-7 text-[13px] font-normal text-[#5A6577]"
           >
             <a
-              href="#mission"
+              href="#gmb-services"
               className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#141C27]"
             >
-              Mission
+              Services
+            </a>
+            <a
+              href="#comparison"
+              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#141C27]"
+            >
+              Why IDM
             </a>
             <a
               href="#work"
@@ -97,10 +108,16 @@ export default function App() {
               Work
             </a>
             <a
-              href="#approach"
+              href="#packages"
               className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#141C27]"
             >
-              Approach
+              Packages
+            </a>
+            <a
+              href="#faq"
+              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#141C27]"
+            >
+              FAQ
             </a>
             <a
               href="#contact"
@@ -146,34 +163,50 @@ export default function App() {
         {/* Mobile Navigation Panel */}
         {mobileNavOpen && (
           <div className="md:hidden border-b border-[#DCE1E8] bg-[#F6F7F9]/98 backdrop-blur-xl px-6 py-5">
-            <nav className="flex flex-col gap-4 text-[14px] text-[#475569]">
+            <nav className="flex flex-col gap-3.5 text-[14px] text-[#475569]">
               <a
-                href="#mission"
+                href="#gmb-services"
+                onClick={() => setMobileNavOpen(false)}
+                className="py-1 hover:text-[#141C27] flex items-center justify-between"
+              >
+                <span>GMB Services</span>
+                <span className="font-mono text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 border border-emerald-200">₹2,999+</span>
+              </a>
+              <a
+                href="#comparison"
                 onClick={() => setMobileNavOpen(false)}
                 className="py-1 hover:text-[#141C27]"
               >
-                Mission
+                Why IDM vs Others
               </a>
               <a
                 href="#work"
                 onClick={() => setMobileNavOpen(false)}
                 className="py-1 hover:text-[#141C27]"
               >
-                Work
+                Selected Work
               </a>
               <a
-                href="#approach"
+                href="#packages"
+                onClick={() => setMobileNavOpen(false)}
+                className="py-1 hover:text-[#141C27] flex items-center justify-between"
+              >
+                <span>Growth Packages</span>
+                <span className="font-mono text-[10px] text-[#4F759B] bg-slate-100 px-2 py-0.5">INR Plans</span>
+              </a>
+              <a
+                href="#faq"
                 onClick={() => setMobileNavOpen(false)}
                 className="py-1 hover:text-[#141C27]"
               >
-                Approach
+                FAQs
               </a>
               <a
                 href="#contact"
                 onClick={() => setMobileNavOpen(false)}
                 className="py-1 hover:text-[#141C27]"
               >
-                Contact
+                Contact &amp; Office
               </a>
 
               <div className="pt-2 flex flex-col gap-2">
@@ -331,6 +364,9 @@ export default function App() {
           </div>
         </section>
 
+        {/* Quick GMB Services Strip — Direct commercial solutions placed immediately below Client Partners */}
+        <QuickGmbServices onOpenConsultation={openConsultation} />
+
         {/* Mission Section */}
         <section
           id="mission"
@@ -382,6 +418,9 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        {/* Agency Comparison Matrix — IDM Senior Operators vs Traditional Agencies */}
+        <AgencyComparison />
 
         {/* Selected Work Section */}
         <section
@@ -464,6 +503,9 @@ export default function App() {
           </div>
         </section>
 
+        {/* 4 Tiered Growth Packages & Retainers in INR */}
+        <GrowthPackages onOpenConsultation={openConsultation} />
+
         {/* Approach Section */}
         <section
           id="approach"
@@ -496,17 +538,56 @@ export default function App() {
           </div>
         </section>
 
-        {/* Centered Editorial Quote Section */}
+        {/* Authoritative FAQs Accordion */}
+        <FaqAccordion />
+
+        {/* Senior Leadership & Editorial Quote Section */}
         <section className="mx-auto max-w-[1240px] px-6 md:px-10 pb-24 md:pb-28">
-          <div className="border border-[#DCE1E8] bg-white/75 backdrop-blur-md py-16 md:py-20 px-8 text-center shadow-xs">
-            <blockquote className="mx-auto max-w-[740px]">
+          <div className="border border-[#DCE1E8] bg-white/75 backdrop-blur-md py-14 md:py-18 px-8 sm:px-12 shadow-xs">
+            <blockquote className="mx-auto max-w-[760px] text-center">
               <p className="font-serif text-[26px] sm:text-[34px] font-normal leading-[1.32] text-[#141C27] text-balance">
                 {SITE_INFO.founderQuote}
               </p>
-              <footer className="mt-7 font-mono text-[10px] tracking-[0.2em] uppercase text-[#748094]">
-                {SITE_INFO.founderName} — {SITE_INFO.founderTitle}
-              </footer>
             </blockquote>
+
+            {/* Senior Leadership Duo Grid */}
+            <div className="mt-12 pt-10 border-t border-[#DCE1E8] grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[880px] mx-auto">
+              {LEADERSHIP.map((leader) => (
+                <div
+                  key={leader.name}
+                  className="border border-[#E2E8F0] bg-white/80 p-6 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-serif text-[19px] font-medium text-[#141C27]">
+                        {leader.name}
+                      </span>
+                      <span className="font-mono text-[9px] uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 border border-emerald-200">
+                        LEADERSHIP
+                      </span>
+                    </div>
+                    <div className="mt-1 font-mono text-[10px] tracking-[0.14em] uppercase text-[#4F759B]">
+                      {leader.role}
+                    </div>
+                    <p className="mt-3 text-[12.5px] leading-[1.65] text-[#5A6577]">
+                      {leader.bio}
+                    </p>
+                  </div>
+
+                  <div className="mt-5 pt-3 border-t border-[#F1F5F9] flex items-center justify-between text-[11px] font-mono text-[#64748B]">
+                    <span>IDM SMART TECH</span>
+                    <a
+                      href="https://wa.me/918519837818?text=Hi%20IDM%2C%20I%20would%20like%20to%20speak%20with%20leadership"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-emerald-700 hover:text-emerald-800 font-semibold inline-flex items-center gap-1"
+                    >
+                      <span>CONNECT →</span>
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </main>
@@ -558,7 +639,7 @@ export default function App() {
                 {SITE_INFO.brand}
               </span>
               <p className="mt-3 text-[13px] leading-[1.7] text-[#94A3B8]">
-                AI-powered digital marketing &amp; full-stack technology agency headquartered in Shamshabad, Hyderabad.
+                AI-powered digital marketing &amp; full-stack technology agency headquartered in Shamshabad, Hyderabad. Led by Raghavendra Goud &amp; Bantaram Sanvika.
               </p>
               <div className="mt-4 flex items-center gap-2 text-[12px] text-emerald-400 font-mono">
                 <ShieldCheck className="h-4 w-4" />

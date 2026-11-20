@@ -7,10 +7,10 @@ interface AIAvatarConciergeProps {
 }
 
 const PRESET_QUERIES = [
-  'Local SEO & Google Maps',
-  'Google & Meta Ads ROI',
-  'Web & Mobile App Development',
-  'WhatsApp AI Automation',
+  'GMB Video Verification & Fixes (₹2,999)',
+  'Google Maps Top 3 & Growth Packages',
+  'Google & Meta Ads Lead Generation',
+  'Custom Web, App & AI Automation',
 ];
 
 export function AIAvatarConcierge({ onOpenConsultation }: AIAvatarConciergeProps) {

@@ -44,6 +44,49 @@ export interface ApproachStep {
   description: string;
 }
 
+export interface GmbServiceItem {
+  id: string;
+  title: string;
+  priceInr: string;
+  numericPrice: number;
+  tat: string;
+  badge: string;
+  description: string;
+  deliverables: string[];
+  whatsappMessage: string;
+}
+
+export interface GrowthPackageItem {
+  id: string;
+  name: string;
+  priceInr: string;
+  billingPeriod: string;
+  isPopular?: boolean;
+  summary: string;
+  idealFor: string;
+  features: string[];
+  whatsappMessage: string;
+}
+
+export interface AgencyComparisonItem {
+  dimension: string;
+  idmAdvantage: string;
+  traditionalLimitation: string;
+}
+
+export interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+  category?: string;
+}
+
+export interface LeaderItem {
+  name: string;
+  role: string;
+  bio: string;
+}
+
 export const SITE_INFO = {
   brand: 'IDM Smart Tech',
   kicker: 'IDM SMART TECH — DIGITAL MARKETING & TECHNOLOGY AGENCY',
@@ -63,6 +106,8 @@ export const SITE_INFO = {
   responseSla: 'We reply within 4 business hours.',
   founderName: 'Raghavendra Goud',
   founderTitle: 'Founder & Lead Strategist, IDM Smart Tech',
+  coFounderName: 'Bantaram Sanvika',
+  coFounderTitle: 'Co-Founder & Operations Lead, IDM Smart Tech',
   ratingScore: '4.9★',
   reviewCount: '200+ Verified Reviews',
   founderQuote:
@@ -320,3 +365,262 @@ export const APPROACH_STEPS: ApproachStep[] = [
       'Coordinated deployment with QA, GA4, and live KPI dashboards baked in — followed by weekly experimentation across creative, bids, and search to compound measurable growth.',
   },
 ];
+
+export const POPULAR_GMB_SERVICES: GmbServiceItem[] = [
+  {
+    id: 'video-verification',
+    title: 'GMB Video Verification',
+    priceInr: '₹2,999',
+    numericPrice: 2999,
+    tat: '24–48 Hours',
+    badge: 'RAPID APPROVAL',
+    description:
+      'End-to-end guidance and live preparation adhering to Google’s stringent 2026 video verification guidelines.',
+    deliverables: [
+      'Live recording rehearsal & pre-audit',
+      'Signage, equipment & registration proof check',
+      '100% compliant video capture & submission',
+      'Fast-track resolution or re-attempt guarantee',
+    ],
+    whatsappMessage:
+      'Hi IDM Smart Tech, I need urgent assistance with GMB Video Verification (₹2,999).',
+  },
+  {
+    id: 'profile-reinstatement',
+    title: 'GMB Profile Reinstatement',
+    priceInr: '₹2,999',
+    numericPrice: 2999,
+    tat: '3–5 Business Days',
+    badge: 'SUSPENSION RECOVERY',
+    description:
+      'Root-cause forensic audit and official appeal filing for suspended, disabled, or soft-banned listings.',
+    deliverables: [
+      'Google Policy violation diagnostic audit',
+      'Government proof & business license dossier assembly',
+      'Direct specialist appeal filing & case escalation',
+      'Listing restoration & rank protection safeguard',
+    ],
+    whatsappMessage:
+      'Hi IDM Smart Tech, my Google Business Profile is suspended. I need Reinstatement support (₹2,999).',
+  },
+  {
+    id: 'profile-creation',
+    title: 'New GMB Profile Setup',
+    priceInr: '₹4,000',
+    numericPrice: 4000,
+    tat: '3–7 Business Days',
+    badge: 'FOUNDATION SETUP',
+    description:
+      'Complete, search-optimized Google Business Profile creation engineered for immediate regional visibility.',
+    deliverables: [
+      'Primary & secondary category precision mapping',
+      'Geo-tagged high-res photography suite upload',
+      'NAP consistency across essential business indexes',
+      'Guided verification pathway until live status',
+    ],
+    whatsappMessage:
+      'Hi IDM Smart Tech, I want to create and optimize a New Google Business Profile (₹4,000).',
+  },
+  {
+    id: 'number-update',
+    title: 'GMB Phone Number Update',
+    priceInr: '₹2,999',
+    numericPrice: 2999,
+    tat: '24–72 Hours',
+    badge: 'ALGORITHM FIX',
+    description:
+      'Fix phone numbers stuck in indefinite "Under Review" or rejected by Google’s automated verification algorithms.',
+    deliverables: [
+      'Rejection cause analysis & web schema synchronization',
+      'Telecom proof & regional directory cross-referencing',
+      'Google merchant support manual ticket escalation',
+      'Live calling capability verified on Google Maps',
+    ],
+    whatsappMessage:
+      'Hi IDM Smart Tech, my phone number is stuck under review on GMB. I need the Number Update fix (₹2,999).',
+  },
+];
+
+export const GROWTH_PACKAGES: GrowthPackageItem[] = [
+  {
+    id: 'starter',
+    name: 'Starter Local Plan',
+    priceInr: '₹4,999',
+    billingPeriod: '/ month',
+    summary:
+      'Essential local optimization for single-location businesses entering the Google Maps ecosystem.',
+    idealFor: 'Clinics, retail shops, standalone salons & local trade professionals.',
+    features: [
+      '1 Google Business Profile full audit & weekly maintenance',
+      '15 High-DA Local Citations & Directory Listings / mo',
+      '2 Geo-tagged photo updates & promotional posts / wk',
+      'Review response templates & review velocity playbook',
+      'Monthly Maps ranking movement report',
+      'WhatsApp & Email support (24-hour SLA)',
+    ],
+    whatsappMessage:
+      'Hi IDM Smart Tech, I want to start with the Starter Local Plan (₹4,999/mo).',
+  },
+  {
+    id: 'growth',
+    name: 'Growth Accelerator',
+    priceInr: '₹6,999',
+    billingPeriod: '/ month',
+    summary:
+      'Aggressive geo-expansion designed to break through the Top 3 Map Pack in competitive local zones.',
+    idealFor: 'Growing dental clinics, institutes, multi-unit practices & diagnostic labs.',
+    features: [
+      'Everything in Starter Plan',
+      '30 Verified Citations & Regional Submissions / mo',
+      '4 Custom Geo-optimized Posts & Updates / wk',
+      'Automated Google Review Generation Engine integration',
+      'Geo-grid 13x13 keyword rank tracking & visibility maps',
+      'Competitor duplicate spam audit & suppression reporting',
+      'Dedicated local growth strategist assigned',
+    ],
+    whatsappMessage:
+      'Hi IDM Smart Tech, I am interested in the Growth Accelerator Plan (₹6,999/mo).',
+  },
+  {
+    id: 'ultimate',
+    name: 'Ultimate Domination',
+    priceInr: '₹9,999',
+    billingPeriod: '/ month',
+    summary:
+      'Heavyweight local authority system engineered to capture and protect #1 Map Pack dominance.',
+    idealFor: 'High-ticket practices, luxury realty, multi-speciality hospitals & flagship brands.',
+    features: [
+      'Everything in Growth Accelerator Plan',
+      '50+ High DA/PA Niche Citations & Press Releases',
+      'Local landing page schema markup & technical on-page SEO',
+      'Google Maps 3-Pack Authority Link Velocity engine',
+      'Continuous competitor listing spam monitoring & active defense',
+      'Bi-weekly strategic review calls + 24/7 live KPI dashboard',
+      'Priority 4-hour support SLA',
+    ],
+    whatsappMessage:
+      'Hi IDM Smart Tech, I want to book the Ultimate Domination Plan (₹9,999/mo).',
+  },
+  {
+    id: 'pro-growth-leads',
+    name: 'Pro Plan — Growth & Leads',
+    priceInr: '₹16,999',
+    billingPeriod: '/ month',
+    isPopular: true,
+    summary:
+      'Complete end-to-end agency engine: Local Maps Dominance + Paid Acquisition + Automated Lead Funnels.',
+    idealFor: 'Companies demanding rapid, qualified inbound commercial leads and maximum regional authority.',
+    features: [
+      'Everything in Ultimate Domination (Full Map Pack Domination)',
+      'Google Ads & Meta Ads Full Management (Search, Performance Max & Meta Lead Ads)',
+      'High-converting landing page optimization & conversion rate tuning',
+      'Automated WhatsApp lead capture & instant notification routing',
+      'Weekly live KPI sprint reviews & direct Founder strategy access',
+      'Dedicated Senior Growth Engineer + 2-Hour priority SLA',
+    ],
+    whatsappMessage:
+      'Hi IDM Smart Tech, I want to book the Pro Plan — Growth & Leads (₹16,999/mo).',
+  },
+];
+
+export const IDM_VS_TRADITIONAL: AgencyComparisonItem[] = [
+  {
+    dimension: 'Contract Terms',
+    idmAdvantage: 'Month-to-month contracts. We earn your partnership every 30 days on merit.',
+    traditionalLimitation: 'Rigid 6 to 12-month lock-in contracts with hefty cancellation penalties.',
+  },
+  {
+    dimension: 'Seniority & Talent',
+    idmAdvantage: 'Direct access to senior growth engineers & founders. Zero junior handoffs.',
+    traditionalLimitation: 'Pawned off to overworked junior account reps running generic playbooks.',
+  },
+  {
+    dimension: 'Local Maps Methodology',
+    idmAdvantage: 'Proprietary geo-grid optimization, localized schema, and 100% white-hat citation stacking.',
+    traditionalLimitation: 'Outdated automated directory blasts and generic copy-paste templates.',
+  },
+  {
+    dimension: 'Conversion Ownership',
+    idmAdvantage: 'Full-funnel ownership: high-converting landing pages & automated WhatsApp lead routing.',
+    traditionalLimitation: 'Delivers raw traffic or clicks and blames your sales team when leads do not convert.',
+  },
+  {
+    dimension: 'KPI Reporting',
+    idmAdvantage: '24/7 live KPI dashboards plus concise weekly executive summaries in plain English.',
+    traditionalLimitation: 'Static 30-day PDF reports filled with vanity impressions and obscure jargon.',
+  },
+  {
+    dimension: 'Support & SLA',
+    idmAdvantage: 'Direct WhatsApp & Slack communication with rapid response under 4 business hours.',
+    traditionalLimitation: '24–72 hour turnaround routed through slow, impersonal ticketing queues.',
+  },
+  {
+    dimension: 'Policy & Safety',
+    idmAdvantage: 'Specialist-level Google compliance team preventing and solving profile suspensions.',
+    traditionalLimitation: 'Risky automated black-hat tactics that trigger permanent Google suspensions.',
+  },
+  {
+    dimension: 'Full-Stack Execution',
+    idmAdvantage: 'In-house SEO, paid media, Next.js web, Flutter mobile, CRM/ERP & AI under one roof.',
+    traditionalLimitation: 'Siloed agency outsourcing code, creative, and tech to disconnected third parties.',
+  },
+];
+
+export const FAQS: FaqItem[] = [
+  {
+    id: 'faq-1',
+    category: 'TIMELINES & RESULTS',
+    question: 'How long does it take to see results from Local SEO and Google Business Profile optimization?',
+    answer:
+      'Most businesses begin seeing measurable upward movement in their Google Map Pack rankings within 30 to 60 days. Because local search authority compounds over time, the most substantial surge in customer phone calls, direction requests, and qualified inquiries accelerates from month 3 onwards as local citations index and customer review velocity builds.',
+  },
+  {
+    id: 'faq-2',
+    category: 'RANKINGS & GUARANTEES',
+    question: 'Do you guarantee #1 rankings on Google Maps?',
+    answer:
+      'No ethical agency can guarantee an absolute #1 position, as Google’s ranking algorithm dynamically calculates user proximity, keyword relevance, and local business prominence in real-time. However, we guarantee proven, 100% white-hat methodologies, aggressive geo-optimization, and transparent tracking. Over 92% of our active clients achieve top 3 Map Pack rankings for their target commercial keywords within 90 days.',
+  },
+  {
+    id: 'faq-3',
+    category: 'LOCAL SEO VS GBP',
+    question: 'What is the key difference between Local SEO and Google Business Profile (GBP)?',
+    answer:
+      'Your Google Business Profile is your verified map listing and primary local customer touchpoint. Local SEO is the comprehensive organic engine that powers and sustains it — including local landing page optimization, technical geo-schema, high-authority citations across business directories, localized backlinks, and reputation management that signals to Google your business is the most trusted choice in the region.',
+  },
+  {
+    id: 'faq-4',
+    category: 'CONTRACTS & COMMITMENTS',
+    question: 'Are there any long-term lock-in contracts?',
+    answer:
+      'Never. We believe in earning your business every single month. All our growth packages operate on flexible month-to-month terms with complete client data ownership and zero lock-in penalties. You stay with IDM Smart Tech because of measurable ROI and revenue growth, not because of a legal contract.',
+  },
+  {
+    id: 'faq-5',
+    category: 'CUSTOM SERVICES',
+    question: 'How do you calculate pricing for custom software, web development, and advertising?',
+    answer:
+      'For custom web platforms, mobile applications, CRM/ERP engineering, and paid ad management, pricing is calibrated transparently to the project’s technical scope, target market competitiveness, and ad spend scale. We provide detailed, itemized proposals with fixed milestone pricing before any work begins — no unexpected fees, ever.',
+  },
+  {
+    id: 'faq-6',
+    category: 'GEOGRAPHY & CLIENTS',
+    question: 'Do you work with businesses outside Hyderabad and international clients?',
+    answer:
+      'Yes. While our headquarters and primary operations hub are based in Shamshabad, Hyderabad, we actively manage local SEO, performance ad funnels, and enterprise digital engineering for clients across India, the United Arab Emirates, the United Kingdom, the United States, and Australia.',
+  },
+];
+
+export const LEADERSHIP: LeaderItem[] = [
+  {
+    name: 'Raghavendra Goud',
+    role: 'Founder & Lead Strategist',
+    bio: 'Oversees cross-functional growth strategies, Google Maps authority engineering, and enterprise AI automation architectures with over a decade of hands-on digital leadership.',
+  },
+  {
+    name: 'Bantaram Sanvika',
+    role: 'Co-Founder & Operations Lead',
+    bio: 'Directs operational delivery, client success workflows, quality assurance, and seamless service execution across all technology and marketing client engagements.',
+  },
+];
+
