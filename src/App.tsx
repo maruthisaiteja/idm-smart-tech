@@ -28,7 +28,7 @@ import { CaseStudyModal } from './components/CaseStudyModal';
 import { ConsultationModal } from './components/ConsultationModal';
 import { LegalModal, type LegalTab } from './components/LegalModal';
 import { ScrollCanvas } from './components/ScrollCanvas';
-import { AIAvatarConcierge } from './components/AIAvatarConcierge';
+import { FounderAvatarWidget } from './components/FounderAvatarWidget';
 import { QuickGmbServices } from './components/QuickGmbServices';
 import { AgencyComparison } from './components/AgencyComparison';
 import { GrowthPackages } from './components/GrowthPackages';
@@ -60,26 +60,26 @@ export default function App() {
       {/* Scroll-driven 300-Frame Animation Canvas */}
       <ScrollCanvas />
 
-      {/* Floating 3D AI Concierge Avatar */}
-      <AIAvatarConcierge onOpenConsultation={openConsultation} />
+      {/* Floating 3D Dynamic Founder Avatar & Captive Lead Widget (Bantaram Sanvika) */}
+      <FounderAvatarWidget onOpenConsultation={openConsultation} />
 
       {/* Top Navigation Bar */}
-      <header className="sticky top-0 z-40 w-full bg-[#F6F7F9]/92 backdrop-blur-md border-b border-[#DCE1E8]/80 transition-colors">
+      <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b-2 border-slate-200 transition-colors shadow-xs">
         <div className="mx-auto flex h-20 max-w-[1240px] items-center justify-between gap-8 px-6 md:px-10">
           {/* Zone 1: Brand Wordmark + Status */}
           <a
             href="#top"
-            className="inline-flex items-center gap-2.5 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#141C27]"
+            className="inline-flex items-center gap-2.5 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0F172A]"
           >
             <svg
               viewBox="0 0 12 12"
-              className="h-2.5 w-2.5 text-[#141C27] shrink-0"
+              className="h-3 w-3 text-[#0F172A] shrink-0"
               fill="currentColor"
               aria-hidden="true"
             >
               <rect x="6" y="0.5" width="7.7" height="7.7" transform="rotate(45 6 0.5)" />
             </svg>
-            <span className="font-serif text-[17.5px] font-medium tracking-[-0.01em] text-[#141C27]">
+            <span className="font-serif text-[18px] font-bold tracking-[-0.01em] text-[#0F172A]">
               {SITE_INFO.brand}
             </span>
           </a>
@@ -87,41 +87,41 @@ export default function App() {
           {/* Zone 2: Navigation Links */}
           <nav
             aria-label="Primary navigation"
-            className="hidden md:flex items-center gap-7 text-[13px] font-normal text-[#5A6577]"
+            className="hidden md:flex items-center gap-7 text-[13.5px] font-semibold text-[#0F172A]"
           >
             <a
               href="#gmb-services"
-              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#141C27]"
+              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#365679]"
             >
               Services
             </a>
             <a
               href="#comparison"
-              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#141C27]"
+              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#365679]"
             >
               Why IDM
             </a>
             <a
               href="#work"
-              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#141C27]"
+              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#365679]"
             >
               Work
             </a>
             <a
               href="#packages"
-              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#141C27]"
+              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#365679]"
             >
               Packages
             </a>
             <a
               href="#faq"
-              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#141C27]"
+              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#365679]"
             >
               FAQ
             </a>
             <a
               href="#contact"
-              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#141C27]"
+              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#365679]"
             >
               Contact
             </a>
@@ -133,17 +133,17 @@ export default function App() {
               href={SITE_INFO.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden lg:inline-flex items-center gap-1.5 border border-[#DCE1E8] bg-white/70 px-3.5 py-2 text-[11px] font-mono tracking-wider text-[#141C27] hover:border-emerald-600 hover:text-emerald-700 transition-colors"
+              className="hidden lg:inline-flex items-center gap-1.5 border-2 border-emerald-600 bg-emerald-50 px-3.5 py-2 text-[11px] font-mono tracking-wider text-emerald-950 font-bold hover:bg-emerald-600 hover:text-white transition-colors"
               title="Chat on WhatsApp"
             >
-              <MessageCircle className="h-3.5 w-3.5 text-emerald-600" />
+              <MessageCircle className="h-4 w-4 text-emerald-700" />
               <span>WHATSAPP</span>
             </a>
 
             <button
               type="button"
               onClick={() => openConsultation()}
-              className="hidden sm:inline-flex items-center justify-center border border-[#141C27] bg-white/80 px-5 py-2.5 font-mono text-[10.5px] tracking-[0.16em] uppercase text-[#141C27] whitespace-nowrap shrink-0 transition-colors duration-150 hover:bg-[#141C27] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#141C27]"
+              className="hidden sm:inline-flex items-center justify-center border-2 border-[#0F172A] bg-[#0F172A] px-5 py-2.5 font-mono text-[10.5px] tracking-[0.16em] uppercase text-white font-bold whitespace-nowrap shrink-0 transition-colors duration-150 hover:bg-[#1E293B] shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F172A]"
             >
               START A PROJECT
             </button>
@@ -153,9 +153,9 @@ export default function App() {
               onClick={() => setMobileNavOpen((prev) => !prev)}
               aria-label={mobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={mobileNavOpen}
-              className="md:hidden inline-flex h-10 w-10 items-center justify-center border border-[#D8DEE6] bg-white text-[#141C27]"
+              className="md:hidden inline-flex h-10 w-10 items-center justify-center border-2 border-slate-300 bg-white text-[#0F172A]"
             >
-              {mobileNavOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              {mobileNavOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
@@ -240,21 +240,21 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center min-h-[64vh]">
             {/* Left 7 Columns: Hero Editorial Content */}
             <div className="lg:col-span-7 flex flex-col justify-center z-10">
-              <div className="inline-flex items-center gap-2.5 border border-[#DCE1E8] bg-white/75 backdrop-blur-md px-3.5 py-1.5 w-fit">
+              <div className="inline-flex items-center gap-2.5 border-2 border-slate-300 bg-white/95 px-3.5 py-1.5 w-fit shadow-xs">
                 <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="font-mono text-[9.5px] tracking-[0.18em] uppercase text-[#64748B]">
+                <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#0F172A] font-bold">
                   HYDERABAD &amp; GLOBAL · GOOGLE &amp; META PARTNER
                 </span>
               </div>
 
-              <h1 className="mt-6 sm:mt-7 font-serif text-[34px] sm:text-[52px] lg:text-[68px] font-normal leading-[1.1] sm:leading-[1.07] tracking-[-0.025em] text-[#141C27] text-balance">
+              <h1 className="mt-6 sm:mt-7 font-serif text-[36px] sm:text-[54px] lg:text-[70px] font-normal leading-[1.08] sm:leading-[1.05] tracking-[-0.025em] text-[#0F172A] text-balance">
                 We turn technology into{' '}
                 <span className="block sm:inline">
-                  <span className="italic text-[#4F759B]">growth</span>.
+                  <span className="italic text-[#365679] font-medium">growth</span>.
                 </span>
               </h1>
 
-              <p className="mt-5 sm:mt-6 max-w-[530px] text-[14.5px] sm:text-[15.5px] leading-[1.7] sm:leading-[1.78] text-[#5A6577]">
+              <p className="mt-5 sm:mt-6 max-w-[540px] text-[15.5px] sm:text-[17px] leading-[1.74] text-[#1E293B] font-medium">
                 {SITE_INFO.heroLead}
               </p>
 
@@ -262,7 +262,7 @@ export default function App() {
                 <button
                   type="button"
                   onClick={() => openConsultation()}
-                  className="w-full sm:w-auto inline-flex items-center justify-center bg-[#141C27] px-7 py-3.5 font-mono text-[10.5px] tracking-[0.16em] uppercase text-white whitespace-nowrap shadow-sm hover:bg-[#1E293B] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#141C27]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center bg-[#0F172A] px-7 py-3.5 font-mono text-[11px] tracking-[0.16em] uppercase text-white font-bold whitespace-nowrap shadow-md hover:bg-[#1E293B] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F172A]"
                 >
                   START A PROJECT
                 </button>
@@ -271,15 +271,15 @@ export default function App() {
                   href={SITE_INFO.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-emerald-600/40 bg-white/80 backdrop-blur-sm px-5 py-3.5 font-mono text-[10.5px] tracking-[0.16em] uppercase text-emerald-800 hover:bg-emerald-600 hover:text-white transition-all shadow-xs"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-emerald-600 bg-emerald-50 px-5 py-3.5 font-mono text-[11px] tracking-[0.16em] uppercase text-emerald-950 font-bold hover:bg-emerald-600 hover:text-white transition-all shadow-xs"
                 >
-                  <MessageCircle className="h-4 w-4 text-emerald-600" />
+                  <MessageCircle className="h-4 w-4 text-emerald-700" />
                   <span>WHATSAPP DIRECT</span>
                 </a>
 
                 <a
                   href="#work"
-                  className="inline-flex items-center justify-center gap-1.5 py-2 font-mono text-[10.5px] tracking-[0.16em] uppercase text-[#5A6577] hover:text-[#141C27] transition-colors"
+                  className="inline-flex items-center justify-center gap-1.5 py-2 font-mono text-[11px] tracking-[0.16em] uppercase text-[#0F172A] font-bold hover:text-[#365679] transition-colors"
                 >
                   <span>OUR WORK</span>
                   <span aria-hidden="true">↓</span>
@@ -287,15 +287,15 @@ export default function App() {
               </div>
 
               {/* Quick Trust Credentials Strip on Left */}
-              <div className="mt-9 pt-5 border-t border-[#DCE1E8]/70 flex flex-wrap items-center gap-x-6 gap-y-2 text-[12px] text-[#64748B]">
-                <div className="flex items-center gap-1.5 font-medium text-[#141C27]">
-                  <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-500" />
+              <div className="mt-9 pt-5 border-t-2 border-slate-200 flex flex-wrap items-center gap-x-6 gap-y-2 text-[12.5px] text-[#0F172A]">
+                <div className="flex items-center gap-1.5 font-bold text-[#0F172A]">
+                  <Star className="h-4 w-4 fill-amber-400 text-amber-500" />
                   <span>4.9 / 5 Rating</span>
-                  <span className="text-[#64748B] font-normal">(200+ Verified Reviews)</span>
+                  <span className="text-[#334155] font-semibold">(200+ Verified Reviews)</span>
                 </div>
                 <span>·</span>
-                <div className="flex items-center gap-1.5">
-                  <Clock className="h-3.5 w-3.5 text-[#64748B]" />
+                <div className="flex items-center gap-1.5 font-medium text-[#1E293B]">
+                  <Clock className="h-4 w-4 text-emerald-700" />
                   <span>Replies within 4 business hours</span>
                 </div>
               </div>
@@ -304,20 +304,20 @@ export default function App() {
             {/* Right 5 Columns: OPEN CLEAR VIEWPORT FOR 3D ANIMATION */}
             {/* Kept unobstructed so the floating 3D growth interface frames shine with 100% clarity */}
             <div className="hidden lg:flex lg:col-span-5 h-full min-h-[460px] pointer-events-none items-end justify-end pb-4">
-              <div className="border border-[#DCE1E8]/70 bg-white/50 backdrop-blur-xs px-3.5 py-1.5 font-mono text-[9px] tracking-[0.18em] uppercase text-[#748094]">
+              <div className="border-2 border-slate-300 bg-white/90 backdrop-blur-xs px-4 py-2 font-mono text-[9.5px] tracking-[0.18em] uppercase text-[#0F172A] font-bold shadow-xs">
                 IDM 3D GROWTH ENGINE · SCROLL TO SCRUB
               </div>
             </div>
           </div>
 
           {/* 4-Column Performance Metrics Bar */}
-          <div className="mt-14 border border-[#DCE1E8] bg-white/75 backdrop-blur-md shadow-xs grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#DCE1E8]">
+          <div className="mt-14 border-2 border-slate-300 bg-white/95 backdrop-blur-md shadow-md grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-slate-300">
             {HERO_STATS.map((stat, idx) => (
               <div key={stat.label} className="p-6 sm:p-7">
-                <div className="font-serif text-[32px] sm:text-[36px] leading-none text-[#141C27] tabular-nums font-normal">
+                <div className="font-serif text-[34px] sm:text-[38px] leading-none text-[#0F172A] tabular-nums font-bold">
                   {stat.value}
                 </div>
-                <div className="mt-2.5 font-mono text-[9.5px] tracking-[0.18em] uppercase text-[#64748B]">
+                <div className="mt-2.5 font-mono text-[10px] tracking-[0.18em] uppercase text-[#0F172A] font-bold">
                   {stat.label}
                 </div>
               </div>
@@ -376,13 +376,13 @@ export default function App() {
             {/* Left Column */}
             <div className="lg:col-span-4">
               <div className="flex items-center gap-3.5">
-                <span className="h-[1px] w-7 bg-[#94A3B8] shrink-0" aria-hidden="true" />
-                <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#64748B]">
+                <span className="h-[2px] w-7 bg-[#0F172A] shrink-0" aria-hidden="true" />
+                <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#0F172A] font-bold border border-slate-300 bg-slate-100 px-2.5 py-1">
                   OUR MISSION
                 </span>
               </div>
 
-              <h2 className="mt-6 font-serif text-[38px] sm:text-[44px] font-normal leading-[1.12] tracking-[-0.015em] text-[#141C27]">
+              <h2 className="mt-6 font-serif text-[40px] sm:text-[48px] font-normal leading-[1.1] tracking-[-0.015em] text-[#0F172A]">
                 Strategy first.
                 <br />
                 Ship fast.
@@ -392,24 +392,24 @@ export default function App() {
             </div>
 
             {/* Right Editorial Narrative + 4 Numbered Pillars in Frosted Cards */}
-            <div className="lg:col-span-8 bg-white/75 backdrop-blur-md p-8 sm:p-10 border border-[#DCE1E8] shadow-xs">
-              <p className="text-[15.5px] leading-[1.8] text-[#475569] mb-12">
+            <div className="lg:col-span-8 bg-white/95 backdrop-blur-md p-8 sm:p-10 border-2 border-slate-300 shadow-md">
+              <p className="text-[16px] sm:text-[17px] leading-[1.8] text-[#1E293B] font-medium mb-12">
                 {MISSION_INTRO}
               </p>
 
-              <div className="border-t border-[#DCE1E8] divide-y divide-[#DCE1E8] border-b">
+              <div className="border-t-2 border-slate-200 divide-y divide-slate-200 border-b-2">
                 {MISSION_PILLARS.map((pillar) => (
                   <div
                     key={pillar.index}
-                    className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 py-7 items-start"
+                    className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 py-7 items-start hover:bg-slate-50/70 transition-colors"
                   >
-                    <div className="sm:col-span-1 pt-1 font-mono text-[11px] tracking-[0.1em] text-[#4F759B] tabular-nums">
+                    <div className="sm:col-span-1 pt-1 font-mono text-[12.5px] tracking-[0.1em] text-[#0F172A] font-extrabold tabular-nums">
                       {pillar.index}
                     </div>
-                    <h3 className="sm:col-span-4 font-serif text-[21px] font-normal leading-[1.28] text-[#141C27]">
+                    <h3 className="sm:col-span-4 font-serif text-[22px] font-bold leading-[1.28] text-[#0F172A]">
                       {pillar.title}
                     </h3>
-                    <p className="sm:col-span-7 text-[13.5px] leading-[1.72] text-[#5A6577]">
+                    <p className="sm:col-span-7 text-[14px] leading-[1.72] text-[#1E293B] font-medium">
                       {pillar.description}
                     </p>
                   </div>
@@ -431,23 +431,23 @@ export default function App() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
               <div>
                 <div className="flex items-center gap-3.5">
-                  <span className="h-[1px] w-7 bg-[#94A3B8] shrink-0" aria-hidden="true" />
-                  <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#64748B]">
+                  <span className="h-[2px] w-7 bg-[#0F172A] shrink-0" aria-hidden="true" />
+                  <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#0F172A] font-bold border border-slate-300 bg-slate-100 px-2.5 py-1">
                     SELECTED WORK
                   </span>
                 </div>
-                <h2 className="mt-5 font-serif text-[38px] sm:text-[46px] font-normal leading-[1.12] tracking-[-0.015em] text-[#141C27]">
+                <h2 className="mt-5 font-serif text-[38px] sm:text-[46px] font-normal leading-[1.12] tracking-[-0.015em] text-[#0F172A]">
                   Proud to partner with
                 </h2>
               </div>
 
-              <p className="max-w-[320px] text-[13px] leading-[1.68] text-[#5A6577]">
+              <p className="max-w-[340px] text-[14px] leading-[1.68] text-[#1E293B] font-medium">
                 A selection of active partnerships across healthcare, retail, real estate, EV mobility, and enterprise software.
               </p>
             </div>
 
             {/* 3x3 Crisp Bordered Grid with Translucent Elevation */}
-            <div className="border border-[#D5DCE4] bg-[#F7F8FA]/90 backdrop-blur-sm shadow-xs">
+            <div className="border-2 border-slate-300 bg-white/95 backdrop-blur-sm shadow-md">
               <div className="grid grid-cols-1 md:grid-cols-3">
                 {SELECTED_WORK.map((project, index) => {
                   const isLastRowDesktop = index >= 6;
@@ -457,31 +457,31 @@ export default function App() {
                       key={project.id}
                       type="button"
                       onClick={() => setSelectedProject(project)}
-                      className={`group text-left p-8 md:p-9 min-h-[220px] flex flex-col justify-between transition-colors duration-150 hover:bg-white focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#141C27] ${
-                        !isLastItemMobile ? 'border-b border-[#DDE2E8]' : ''
+                      className={`group text-left p-8 md:p-9 min-h-[220px] flex flex-col justify-between transition-colors duration-150 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#0F172A] ${
+                        !isLastItemMobile ? 'border-b border-slate-200' : ''
                       } ${isLastRowDesktop ? 'md:border-b-0' : ''} ${
-                        index % 3 !== 2 ? 'md:border-r md:border-[#DDE2E8]' : ''
+                        index % 3 !== 2 ? 'md:border-r md:border-slate-200' : ''
                       }`}
                     >
                       <div>
                         <div className="flex items-center justify-between gap-4">
                           <GeometricEmblem
                             emblem={project.emblem}
-                            className="h-6 w-6 text-[#334155] transition-transform duration-200 group-hover:scale-105"
+                            className="h-6 w-6 text-[#0F172A] transition-transform duration-200 group-hover:scale-105"
                           />
-                          <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-[#748094] tabular-nums">
+                          <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-[#0F172A] font-bold bg-slate-100 border border-slate-300 px-2 py-0.5 tabular-nums">
                             {project.metricBadge}
                           </span>
                         </div>
 
-                        <h3 className="mt-7 font-serif text-[20px] font-normal leading-[1.25] text-[#141C27]">
+                        <h3 className="mt-7 font-serif text-[21px] font-bold leading-[1.25] text-[#0F172A] group-hover:text-[#365679] transition-colors">
                           {project.name}
                         </h3>
-                        <p className="mt-1.5 text-[12.5px] text-[#64748B]">{project.subtitle}</p>
+                        <p className="mt-1.5 text-[13px] text-[#1E293B] font-medium">{project.subtitle}</p>
                       </div>
 
-                      <div className="mt-8 pt-4 border-t border-[#E2E7EE]">
-                        <span className="font-mono text-[9.5px] tracking-[0.18em] uppercase text-[#5A6577]">
+                      <div className="mt-8 pt-4 border-t border-slate-200">
+                        <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#0F172A] font-bold">
                           {project.category}
                         </span>
                       </div>
@@ -495,7 +495,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => openConsultation('Full Case Studies')}
-                className="font-mono text-[10px] tracking-[0.22em] uppercase text-[#64748B] transition-colors duration-150 hover:text-[#141C27] py-2"
+                className="font-mono text-[11px] tracking-[0.22em] uppercase text-[#0F172A] font-bold transition-colors duration-150 hover:text-[#365679] py-2 underline"
               >
                 FULL CASE STUDIES SHARED ON REQUEST →
               </button>
@@ -512,8 +512,8 @@ export default function App() {
           className="mx-auto max-w-[1240px] px-6 md:px-10 py-24 md:py-28"
         >
           <div className="flex items-center gap-3.5 mb-12">
-            <span className="h-[1px] w-7 bg-[#94A3B8] shrink-0" aria-hidden="true" />
-            <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#64748B]">
+            <span className="h-[2px] w-7 bg-[#0F172A] shrink-0" aria-hidden="true" />
+            <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#0F172A] font-bold border border-slate-300 bg-slate-100 px-2.5 py-1">
               APPROACH
             </span>
           </div>
@@ -522,15 +522,15 @@ export default function App() {
             {APPROACH_STEPS.map((step) => (
               <div
                 key={step.kicker}
-                className="border-t border-[#141C27] bg-white/80 backdrop-blur-sm p-8 border-x border-b border-[#DCE1E8] shadow-xs"
+                className="border-t-4 border-t-[#0F172A] bg-white/95 backdrop-blur-sm p-8 border-x-2 border-b-2 border-slate-300 shadow-sm"
               >
-                <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#748094]">
+                <div className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#0F172A] font-bold">
                   {step.kicker}
                 </div>
-                <h3 className="mt-3.5 font-serif text-[24px] font-normal leading-[1.25] text-[#141C27]">
+                <h3 className="mt-3.5 font-serif text-[24px] font-bold leading-[1.25] text-[#0F172A]">
                   {step.title}
                 </h3>
-                <p className="mt-4 text-[13.5px] leading-[1.74] text-[#5A6577]">
+                <p className="mt-4 text-[14px] leading-[1.74] text-[#1E293B] font-medium">
                   {step.description}
                 </p>
               </div>
@@ -551,42 +551,62 @@ export default function App() {
             </blockquote>
 
             {/* Senior Leadership Duo Grid */}
-            <div className="mt-12 pt-10 border-t border-[#DCE1E8] grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[880px] mx-auto">
-              {LEADERSHIP.map((leader) => (
-                <div
-                  key={leader.name}
-                  className="border border-[#E2E8F0] bg-white/80 p-6 flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="font-serif text-[19px] font-medium text-[#141C27]">
-                        {leader.name}
-                      </span>
-                      <span className="font-mono text-[9px] uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 border border-emerald-200">
-                        LEADERSHIP
-                      </span>
-                    </div>
-                    <div className="mt-1 font-mono text-[10px] tracking-[0.14em] uppercase text-[#4F759B]">
-                      {leader.role}
-                    </div>
-                    <p className="mt-3 text-[12.5px] leading-[1.65] text-[#5A6577]">
-                      {leader.bio}
-                    </p>
-                  </div>
+            <div className="mt-12 pt-10 border-t-2 border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[900px] mx-auto">
+              {LEADERSHIP.map((leader) => {
+                const isSanvika = leader.name.toLowerCase().includes('sanvika');
+                const photoSrc = isSanvika ? '/sanvika-avatar.png' : '/founder-raghavendra.jpg';
 
-                  <div className="mt-5 pt-3 border-t border-[#F1F5F9] flex items-center justify-between text-[11px] font-mono text-[#64748B]">
-                    <span>IDM SMART TECH</span>
-                    <a
-                      href="https://wa.me/918519837818?text=Hi%20IDM%2C%20I%20would%20like%20to%20speak%20with%20leadership"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-emerald-700 hover:text-emerald-800 font-semibold inline-flex items-center gap-1"
-                    >
-                      <span>CONNECT →</span>
-                    </a>
+                return (
+                  <div
+                    key={leader.name}
+                    className="border-2 border-slate-300 bg-white/95 p-6 flex flex-col justify-between shadow-sm hover:border-[#0F172A] hover:shadow-lg transition-all text-left"
+                  >
+                    <div>
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="h-16 w-16 rounded-full overflow-hidden border-2 border-[#0F172A] bg-slate-100 shrink-0 shadow-xs">
+                          <img
+                            src={photoSrc}
+                            alt={leader.name}
+                            className="h-full w-full object-cover object-top"
+                          />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h4 className="font-serif text-[20px] font-bold text-[#0F172A]">
+                              {leader.name}
+                            </h4>
+                            <span className="font-mono text-[9px] uppercase tracking-wider text-emerald-950 bg-emerald-100 px-2 py-0.5 border border-emerald-300 font-bold">
+                              LEADER
+                            </span>
+                          </div>
+                          <div className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-[#365679] font-bold mt-0.5">
+                            {leader.role}
+                          </div>
+                        </div>
+                      </div>
+
+                      <p className="mt-2 text-[13.5px] leading-[1.65] text-[#1E293B] font-medium">
+                        {leader.bio}
+                      </p>
+                    </div>
+
+                    <div className="mt-6 pt-3.5 border-t border-slate-200 flex items-center justify-between text-[11px] font-mono text-[#0F172A]">
+                      <span className="font-bold">IDM SMART TECH</span>
+                      <a
+                        href={`https://wa.me/918519837818?text=${encodeURIComponent(
+                          `Hi ${leader.name}, I would like to speak directly with leadership regarding my business growth.`
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-emerald-800 hover:text-emerald-950 font-bold inline-flex items-center gap-1.5"
+                      >
+                        <MessageCircle className="h-3.5 w-3.5 text-emerald-700" />
+                        <span>CHAT ON WHATSAPP →</span>
+                      </a>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
