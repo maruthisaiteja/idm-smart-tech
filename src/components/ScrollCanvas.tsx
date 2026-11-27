@@ -170,11 +170,25 @@ export function ScrollCanvas() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      id="animation-canvas"
-      className="fixed inset-0 w-full h-[100dvh] pointer-events-none z-0"
-      style={{ backgroundColor: '#D4D0C7' }}
-    />
+    <div className="fixed inset-0 w-full h-[100dvh] pointer-events-none z-0 overflow-hidden bg-[#EAEFF7]">
+      <canvas
+        ref={canvasRef}
+        id="animation-canvas"
+        className="w-full h-full block"
+        style={{
+          backgroundColor: '#EAEFF7',
+          filter: 'contrast(1.07) brightness(1.02) saturate(0.86) hue-rotate(-10deg)',
+        }}
+      />
+      {/* Subtle Brand Color-Grading Atmosphere matching IDM Royal Navy & Gold */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(circle at 12% 20%, rgba(11, 27, 66, 0.07) 0%, transparent 48%), radial-gradient(circle at 86% 18%, rgba(248, 213, 1, 0.09) 0%, transparent 45%), linear-gradient(180deg, rgba(244, 247, 252, 0.35) 0%, rgba(244, 247, 252, 0.05) 35%, rgba(11, 27, 66, 0.05) 100%)',
+        }}
+      />
+    </div>
   );
 }

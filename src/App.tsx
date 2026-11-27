@@ -33,6 +33,7 @@ import { QuickGmbServices } from './components/QuickGmbServices';
 import { AgencyComparison } from './components/AgencyComparison';
 import { GrowthPackages } from './components/GrowthPackages';
 import { FaqAccordion } from './components/FaqAccordion';
+import { BrandLogo } from './components/BrandLogo';
 
 export default function App() {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
@@ -56,94 +57,84 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-transparent text-[#141C27] flex flex-col selection:bg-[#4F759B]/20 selection:text-[#141C27]">
-      {/* Scroll-driven 300-Frame Animation Canvas */}
+    <div className="relative min-h-screen bg-transparent text-[#0B1B42] flex flex-col selection:bg-[#F8D501] selection:text-[#0B1B42]">
+      {/* Scroll-driven 300-Frame Animation Canvas with IDM Color Grading */}
       <ScrollCanvas />
 
       {/* Floating 3D Dynamic Founder Avatar & Captive Lead Widget (Bantaram Sanvika) */}
       <FounderAvatarWidget onOpenConsultation={openConsultation} />
 
       {/* Top Navigation Bar */}
-      <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b-2 border-slate-200 transition-colors shadow-xs">
+      <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-t-[3px] border-t-[#F8D501] border-b-2 border-[#0B1B42]/15 transition-colors shadow-sm">
         <div className="mx-auto flex h-20 max-w-[1240px] items-center justify-between gap-8 px-6 md:px-10">
-          {/* Zone 1: Brand Wordmark + Status */}
+          {/* Zone 1: Authentic Company Logo + Brand Wordmark */}
           <a
             href="#top"
-            className="inline-flex items-center gap-2.5 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0F172A]"
+            className="inline-flex items-center whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0B1B42] group"
           >
-            <svg
-              viewBox="0 0 12 12"
-              className="h-3 w-3 text-[#0F172A] shrink-0"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <rect x="6" y="0.5" width="7.7" height="7.7" transform="rotate(45 6 0.5)" />
-            </svg>
-            <span className="font-serif text-[18px] font-bold tracking-[-0.01em] text-[#0F172A]">
-              {SITE_INFO.brand}
-            </span>
+            <BrandLogo variant="light" size="sm" showWordmark showTagline />
           </a>
 
           {/* Zone 2: Navigation Links */}
           <nav
             aria-label="Primary navigation"
-            className="hidden md:flex items-center gap-7 text-[13.5px] font-semibold text-[#0F172A]"
+            className="hidden md:flex items-center gap-7 text-[13.5px] font-bold text-[#0B1B42]"
           >
             <a
               href="#gmb-services"
-              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#365679]"
+              className="whitespace-nowrap shrink-0 py-1 border-b-2 border-transparent hover:border-[#F8D501] transition-all duration-150"
             >
               Services
             </a>
             <a
               href="#comparison"
-              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#365679]"
+              className="whitespace-nowrap shrink-0 py-1 border-b-2 border-transparent hover:border-[#F8D501] transition-all duration-150"
             >
               Why IDM
             </a>
             <a
               href="#work"
-              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#365679]"
+              className="whitespace-nowrap shrink-0 py-1 border-b-2 border-transparent hover:border-[#F8D501] transition-all duration-150"
             >
               Work
             </a>
             <a
               href="#packages"
-              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#365679]"
+              className="whitespace-nowrap shrink-0 py-1 border-b-2 border-transparent hover:border-[#F8D501] transition-all duration-150"
             >
               Packages
             </a>
             <a
               href="#faq"
-              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#365679]"
+              className="whitespace-nowrap shrink-0 py-1 border-b-2 border-transparent hover:border-[#F8D501] transition-all duration-150"
             >
               FAQ
             </a>
             <a
               href="#contact"
-              className="whitespace-nowrap shrink-0 transition-colors duration-150 hover:text-[#365679]"
+              className="whitespace-nowrap shrink-0 py-1 border-b-2 border-transparent hover:border-[#F8D501] transition-all duration-150"
             >
               Contact
             </a>
           </nav>
 
-          {/* Zone 3: Direct Actions (WhatsApp & Start Project) */}
+          {/* Zone 3: Direct Brand Actions (WhatsApp & Gold CTA) */}
           <div className="flex items-center gap-3 shrink-0">
             <a
               href={SITE_INFO.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden lg:inline-flex items-center gap-1.5 border-2 border-emerald-600 bg-emerald-50 px-3.5 py-2 text-[11px] font-mono tracking-wider text-emerald-950 font-bold hover:bg-emerald-600 hover:text-white transition-colors"
+              className="hidden lg:inline-flex items-center gap-1.5 border-2 border-[#0B1B42] bg-white px-3.5 py-2 text-[11px] font-mono tracking-wider text-[#0B1B42] font-bold hover:bg-[#0B1B42] hover:text-[#F8D501] transition-colors"
               title="Chat on WhatsApp"
             >
-              <MessageCircle className="h-4 w-4 text-emerald-700" />
+              <MessageCircle className="h-4 w-4 shrink-0" />
               <span>WHATSAPP</span>
             </a>
 
             <button
               type="button"
               onClick={() => openConsultation()}
-              className="hidden sm:inline-flex items-center justify-center border-2 border-[#0F172A] bg-[#0F172A] px-5 py-2.5 font-mono text-[10.5px] tracking-[0.16em] uppercase text-white font-bold whitespace-nowrap shrink-0 transition-colors duration-150 hover:bg-[#1E293B] shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F172A]"
+              className="hidden sm:inline-flex items-center justify-center border-2 border-[#0B1B42] bg-[#F8D501] px-5 py-2.5 font-mono text-[10.5px] tracking-[0.16em] uppercase text-[#0B1B42] font-extrabold whitespace-nowrap shrink-0 transition-all duration-150 hover:bg-[#0B1B42] hover:text-[#F8D501] shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B1B42]"
             >
               START A PROJECT
             </button>
@@ -153,7 +144,7 @@ export default function App() {
               onClick={() => setMobileNavOpen((prev) => !prev)}
               aria-label={mobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={mobileNavOpen}
-              className="md:hidden inline-flex h-10 w-10 items-center justify-center border-2 border-slate-300 bg-white text-[#0F172A]"
+              className="md:hidden inline-flex h-10 w-10 items-center justify-center border-2 border-[#0B1B42] bg-white text-[#0B1B42]"
             >
               {mobileNavOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -162,68 +153,72 @@ export default function App() {
 
         {/* Mobile Navigation Panel */}
         {mobileNavOpen && (
-          <div className="md:hidden border-b border-[#DCE1E8] bg-[#F6F7F9]/98 backdrop-blur-xl px-6 py-5">
-            <nav className="flex flex-col gap-3.5 text-[14px] text-[#475569]">
+          <div className="md:hidden border-b-2 border-[#0B1B42] bg-white/98 backdrop-blur-xl px-6 py-5">
+            <nav className="flex flex-col gap-3.5 text-[14px] font-bold text-[#0B1B42]">
               <a
                 href="#gmb-services"
                 onClick={() => setMobileNavOpen(false)}
-                className="py-1 hover:text-[#141C27] flex items-center justify-between"
+                className="py-1.5 hover:text-[#162E68] flex items-center justify-between border-b border-slate-100"
               >
                 <span>GMB Services</span>
-                <span className="font-mono text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 border border-emerald-200">₹2,999+</span>
+                <span className="font-mono text-[10px] text-[#0B1B42] bg-[#F8D501] px-2.5 py-0.5 font-bold border border-[#0B1B42]/20">
+                  ₹2,999+
+                </span>
               </a>
               <a
                 href="#comparison"
                 onClick={() => setMobileNavOpen(false)}
-                className="py-1 hover:text-[#141C27]"
+                className="py-1.5 hover:text-[#162E68] border-b border-slate-100"
               >
                 Why IDM vs Others
               </a>
               <a
                 href="#work"
                 onClick={() => setMobileNavOpen(false)}
-                className="py-1 hover:text-[#141C27]"
+                className="py-1.5 hover:text-[#162E68] border-b border-slate-100"
               >
                 Selected Work
               </a>
               <a
                 href="#packages"
                 onClick={() => setMobileNavOpen(false)}
-                className="py-1 hover:text-[#141C27] flex items-center justify-between"
+                className="py-1.5 hover:text-[#162E68] flex items-center justify-between border-b border-slate-100"
               >
                 <span>Growth Packages</span>
-                <span className="font-mono text-[10px] text-[#4F759B] bg-slate-100 px-2 py-0.5">INR Plans</span>
+                <span className="font-mono text-[10px] text-[#F8D501] bg-[#0B1B42] px-2.5 py-0.5 font-bold">
+                  INR Plans
+                </span>
               </a>
               <a
                 href="#faq"
                 onClick={() => setMobileNavOpen(false)}
-                className="py-1 hover:text-[#141C27]"
+                className="py-1.5 hover:text-[#162E68] border-b border-slate-100"
               >
                 FAQs
               </a>
               <a
                 href="#contact"
                 onClick={() => setMobileNavOpen(false)}
-                className="py-1 hover:text-[#141C27]"
+                className="py-1.5 hover:text-[#162E68]"
               >
                 Contact &amp; Office
               </a>
 
-              <div className="pt-2 flex flex-col gap-2">
+              <div className="pt-2 flex flex-col gap-2.5">
                 <a
                   href={SITE_INFO.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 border border-emerald-600 bg-emerald-50 text-emerald-800 px-4 py-2.5 font-mono text-[11px] tracking-wider uppercase"
+                  className="w-full inline-flex items-center justify-center gap-2 border-2 border-[#0B1B42] bg-[#0B1B42] text-white px-4 py-3 font-mono text-[11px] tracking-wider uppercase font-bold"
                 >
-                  <MessageCircle className="h-4 w-4 text-emerald-600" />
+                  <MessageCircle className="h-4 w-4 text-[#F8D501]" />
                   <span>WhatsApp (+91 85198 37818)</span>
                 </a>
 
                 <button
                   type="button"
                   onClick={() => openConsultation()}
-                  className="w-full border border-[#141C27] bg-[#141C27] text-white px-5 py-3 font-mono text-[10.5px] tracking-[0.16em] uppercase hover:bg-[#1E293B] transition-colors"
+                  className="w-full border-2 border-[#0B1B42] bg-[#F8D501] text-[#0B1B42] px-5 py-3 font-mono text-[11px] tracking-[0.16em] uppercase font-extrabold hover:bg-[#E5C300] transition-colors"
                 >
                   START A PROJECT
                 </button>
@@ -239,47 +234,51 @@ export default function App() {
         <section className="mx-auto max-w-[1240px] px-6 md:px-10 pt-16 md:pt-24 pb-14 md:pb-18">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center min-h-[64vh]">
             {/* Left 7 Columns: Hero Editorial Content */}
-            <div className="lg:col-span-7 flex flex-col justify-center z-10">
-              <div className="inline-flex items-center gap-2.5 border-2 border-slate-300 bg-white/95 px-3.5 py-1.5 w-fit shadow-xs">
-                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#0F172A] font-bold">
-                  HYDERABAD &amp; GLOBAL · GOOGLE &amp; META PARTNER
+            <div className="lg:col-span-7 flex flex-col justify-center z-10 bg-white/80 lg:bg-transparent backdrop-blur-sm lg:backdrop-blur-none p-5 sm:p-6 lg:p-0 border border-[#0B1B42]/15 lg:border-0 shadow-xs lg:shadow-none">
+              <div className="inline-flex items-center gap-2.5 border-2 border-[#F8D501]/80 bg-[#0B1B42] px-3.5 py-1.5 w-fit shadow-sm">
+                <span className="h-2 w-2 rounded-full bg-[#F8D501] animate-pulse" />
+                <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-white font-bold">
+                  HYDERABAD &amp; GLOBAL ·{' '}
+                  <span className="text-[#F8D501]">GOOGLE &amp; META PARTNER</span>
                 </span>
               </div>
 
-              <h1 className="mt-6 sm:mt-7 font-serif text-[36px] sm:text-[54px] lg:text-[70px] font-normal leading-[1.08] sm:leading-[1.05] tracking-[-0.025em] text-[#0F172A] text-balance">
+              <h1 className="mt-6 sm:mt-7 font-serif text-[36px] sm:text-[54px] lg:text-[70px] font-normal leading-[1.08] sm:leading-[1.05] tracking-[-0.025em] text-[#0B1B42] text-balance">
                 We turn technology into{' '}
                 <span className="block sm:inline">
-                  <span className="italic text-[#365679] font-medium">growth</span>.
+                  <span className="italic font-semibold text-[#0B1B42] underline decoration-[#F8D501] decoration-[6px] underline-offset-4">
+                    growth
+                  </span>
+                  <span className="text-[#F8D501]">.</span>
                 </span>
               </h1>
 
-              <p className="mt-5 sm:mt-6 max-w-[540px] text-[15.5px] sm:text-[17px] leading-[1.74] text-[#1E293B] font-medium">
+              <p className="mt-5 sm:mt-6 max-w-[540px] text-[15.5px] sm:text-[17px] leading-[1.74] text-[#0F2352] font-medium">
                 {SITE_INFO.heroLead}
               </p>
 
-              <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+              <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                 <button
                   type="button"
                   onClick={() => openConsultation()}
-                  className="w-full sm:w-auto inline-flex items-center justify-center bg-[#0F172A] px-7 py-3.5 font-mono text-[11px] tracking-[0.16em] uppercase text-white font-bold whitespace-nowrap shadow-md hover:bg-[#1E293B] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F172A]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center border-2 border-[#0B1B42] bg-[#0B1B42] px-7 py-3.5 font-mono text-[11px] tracking-[0.16em] uppercase text-[#F8D501] font-extrabold whitespace-nowrap shadow-md hover:bg-[#162E68] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B1B42]"
                 >
-                  START A PROJECT
+                  START A PROJECT →
                 </button>
 
                 <a
                   href={SITE_INFO.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-emerald-600 bg-emerald-50 px-5 py-3.5 font-mono text-[11px] tracking-[0.16em] uppercase text-emerald-950 font-bold hover:bg-emerald-600 hover:text-white transition-all shadow-xs"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-[#0B1B42] bg-[#F8D501] px-6 py-3.5 font-mono text-[11px] tracking-[0.16em] uppercase text-[#0B1B42] font-extrabold hover:bg-[#E5C300] transition-all shadow-sm"
                 >
-                  <MessageCircle className="h-4 w-4 text-emerald-700" />
+                  <MessageCircle className="h-4 w-4 text-[#0B1B42]" />
                   <span>WHATSAPP DIRECT</span>
                 </a>
 
                 <a
                   href="#work"
-                  className="inline-flex items-center justify-center gap-1.5 py-2 font-mono text-[11px] tracking-[0.16em] uppercase text-[#0F172A] font-bold hover:text-[#365679] transition-colors"
+                  className="inline-flex items-center justify-center gap-1.5 px-2 py-2 font-mono text-[11px] tracking-[0.16em] uppercase text-[#0B1B42] font-bold hover:underline hover:decoration-[#F8D501] hover:decoration-2 hover:underline-offset-4 transition-all"
                 >
                   <span>OUR WORK</span>
                   <span aria-hidden="true">↓</span>
@@ -287,15 +286,15 @@ export default function App() {
               </div>
 
               {/* Quick Trust Credentials Strip on Left */}
-              <div className="mt-9 pt-5 border-t-2 border-slate-200 flex flex-wrap items-center gap-x-6 gap-y-2 text-[12.5px] text-[#0F172A]">
-                <div className="flex items-center gap-1.5 font-bold text-[#0F172A]">
-                  <Star className="h-4 w-4 fill-amber-400 text-amber-500" />
+              <div className="mt-9 pt-5 border-t-2 border-[#0B1B42]/15 flex flex-wrap items-center gap-x-6 gap-y-2 text-[12.5px] text-[#0B1B42]">
+                <div className="flex items-center gap-1.5 font-bold text-[#0B1B42]">
+                  <Star className="h-4 w-4 fill-[#F8D501] text-[#0B1B42]" />
                   <span>4.9 / 5 Rating</span>
-                  <span className="text-[#334155] font-semibold">(200+ Verified Reviews)</span>
+                  <span className="text-[#162E68] font-semibold">(200+ Verified Reviews)</span>
                 </div>
-                <span>·</span>
-                <div className="flex items-center gap-1.5 font-medium text-[#1E293B]">
-                  <Clock className="h-4 w-4 text-emerald-700" />
+                <span className="text-[#0B1B42]/40">·</span>
+                <div className="flex items-center gap-1.5 font-semibold text-[#0B1B42]">
+                  <Clock className="h-4 w-4 text-[#0B1B42]" />
                   <span>Replies within 4 business hours</span>
                 </div>
               </div>
@@ -304,31 +303,33 @@ export default function App() {
             {/* Right 5 Columns: OPEN CLEAR VIEWPORT FOR 3D ANIMATION */}
             {/* Kept unobstructed so the floating 3D growth interface frames shine with 100% clarity */}
             <div className="hidden lg:flex lg:col-span-5 h-full min-h-[460px] pointer-events-none items-end justify-end pb-4">
-              <div className="border-2 border-slate-300 bg-white/90 backdrop-blur-xs px-4 py-2 font-mono text-[9.5px] tracking-[0.18em] uppercase text-[#0F172A] font-bold shadow-xs">
-                IDM 3D GROWTH ENGINE · SCROLL TO SCRUB
+              <div className="inline-flex items-center gap-2.5 border-2 border-[#0B1B42]/25 bg-white/95 backdrop-blur-xs px-4 py-2 font-mono text-[9.5px] tracking-[0.18em] uppercase text-[#0B1B42] font-bold shadow-sm">
+                <img src="/idm-logo.png" alt="" className="h-4 w-4 object-contain" aria-hidden="true" />
+                <span>IDM 3D GROWTH ENGINE · SCROLL TO SCRUB</span>
               </div>
             </div>
           </div>
 
           {/* 4-Column Performance Metrics Bar */}
-          <div className="mt-14 border-2 border-slate-300 bg-white/95 backdrop-blur-md shadow-md grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-slate-300">
-            {HERO_STATS.map((stat, idx) => (
+          <div className="mt-14 border-t-4 border-t-[#F8D501] border-x-2 border-b-2 border-[#0B1B42]/20 bg-white/95 backdrop-blur-md shadow-md grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#0B1B42]/15">
+            {HERO_STATS.map((stat) => (
               <div key={stat.label} className="p-6 sm:p-7">
-                <div className="font-serif text-[34px] sm:text-[38px] leading-none text-[#0F172A] tabular-nums font-bold">
+                <div className="font-serif text-[34px] sm:text-[40px] leading-none text-[#0B1B42] tabular-nums font-bold">
                   {stat.value}
                 </div>
-                <div className="mt-2.5 font-mono text-[10px] tracking-[0.18em] uppercase text-[#0F172A] font-bold">
-                  {stat.label}
+                <div className="mt-2.5 font-mono text-[10px] tracking-[0.18em] uppercase text-[#162E68] font-bold flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 bg-[#F8D501] inline-block shrink-0" />
+                  <span>{stat.label}</span>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Client Logo Strip Band */}
+        {/* Client Logo Strip Band — Signature Deep Royal Navy & Gold */}
         <section
           aria-label="Client partners"
-          className="w-full border-y border-[#DCE1E8] bg-[#EEF1F5]/85 backdrop-blur-md py-8 md:py-9"
+          className="w-full border-y-2 border-[#F8D501] bg-[#0B1B42] text-white py-8 md:py-10 shadow-md"
         >
           <div className="mx-auto max-w-[1240px] px-6 md:px-10 space-y-5">
             <div className="flex flex-wrap items-center justify-center gap-x-9 gap-y-4">
@@ -337,10 +338,10 @@ export default function App() {
                   key={client.id}
                   type="button"
                   onClick={() => openProjectById(client.id)}
-                  className="inline-flex items-center gap-2 text-[#5A6577] transition-colors duration-150 hover:text-[#141C27] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#141C27]"
+                  className="inline-flex items-center gap-2.5 text-white/90 transition-colors duration-150 hover:text-[#F8D501] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F8D501]"
                 >
-                  <GeometricEmblem emblem={client.emblem} className="h-4 w-4 text-[#64748B]" />
-                  <span className="font-serif text-[14.5px] whitespace-nowrap">
+                  <GeometricEmblem emblem={client.emblem} className="h-4 w-4 text-[#F8D501]" />
+                  <span className="font-serif text-[15px] font-medium whitespace-nowrap">
                     {client.name}
                   </span>
                 </button>
@@ -352,10 +353,10 @@ export default function App() {
                   key={client.id}
                   type="button"
                   onClick={() => openProjectById(client.id)}
-                  className="inline-flex items-center gap-2 text-[#5A6577] transition-colors duration-150 hover:text-[#141C27] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#141C27]"
+                  className="inline-flex items-center gap-2.5 text-white/90 transition-colors duration-150 hover:text-[#F8D501] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F8D501]"
                 >
-                  <GeometricEmblem emblem={client.emblem} className="h-4 w-4 text-[#64748B]" />
-                  <span className="font-serif text-[14.5px] whitespace-nowrap">
+                  <GeometricEmblem emblem={client.emblem} className="h-4 w-4 text-[#F8D501]" />
+                  <span className="font-serif text-[15px] font-medium whitespace-nowrap">
                     {client.name}
                   </span>
                 </button>
@@ -376,40 +377,44 @@ export default function App() {
             {/* Left Column */}
             <div className="lg:col-span-4">
               <div className="flex items-center gap-3.5">
-                <span className="h-[2px] w-7 bg-[#0F172A] shrink-0" aria-hidden="true" />
-                <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#0F172A] font-bold border border-slate-300 bg-slate-100 px-2.5 py-1">
+                <span className="h-[3px] w-8 bg-[#F8D501] shrink-0" aria-hidden="true" />
+                <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#F8D501] font-bold bg-[#0B1B42] px-3 py-1">
                   OUR MISSION
                 </span>
               </div>
 
-              <h2 className="mt-6 font-serif text-[40px] sm:text-[48px] font-normal leading-[1.1] tracking-[-0.015em] text-[#0F172A]">
+              <h2 className="mt-6 font-serif text-[40px] sm:text-[48px] font-normal leading-[1.1] tracking-[-0.015em] text-[#0B1B42]">
                 Strategy first.
                 <br />
                 Ship fast.
                 <br />
-                Real growth.
+                <span className="underline decoration-[#F8D501] decoration-[5px] underline-offset-4">
+                  Real growth.
+                </span>
               </h2>
             </div>
 
-            {/* Right Editorial Narrative + 4 Numbered Pillars in Frosted Cards */}
-            <div className="lg:col-span-8 bg-white/95 backdrop-blur-md p-8 sm:p-10 border-2 border-slate-300 shadow-md">
-              <p className="text-[16px] sm:text-[17px] leading-[1.8] text-[#1E293B] font-medium mb-12">
+            {/* Right Editorial Narrative + 4 Numbered Pillars in Crisp White-Navy-Gold Cards */}
+            <div className="lg:col-span-8 bg-white/95 backdrop-blur-md p-8 sm:p-10 border-t-4 border-t-[#F8D501] border-x-2 border-b-2 border-[#0B1B42]/20 shadow-md">
+              <p className="text-[16px] sm:text-[17px] leading-[1.8] text-[#0F2352] font-medium mb-12">
                 {MISSION_INTRO}
               </p>
 
-              <div className="border-t-2 border-slate-200 divide-y divide-slate-200 border-b-2">
+              <div className="border-t-2 border-[#0B1B42]/15 divide-y divide-[#0B1B42]/15 border-b-2">
                 {MISSION_PILLARS.map((pillar) => (
                   <div
                     key={pillar.index}
-                    className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 py-7 items-start hover:bg-slate-50/70 transition-colors"
+                    className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 py-7 items-start hover:bg-[#F4F7FC] transition-colors px-2 -mx-2"
                   >
-                    <div className="sm:col-span-1 pt-1 font-mono text-[12.5px] tracking-[0.1em] text-[#0F172A] font-extrabold tabular-nums">
-                      {pillar.index}
+                    <div className="sm:col-span-1 pt-0.5">
+                      <span className="inline-flex items-center justify-center bg-[#F8D501] text-[#0B1B42] font-mono text-[12px] font-extrabold px-2 py-0.5 border border-[#0B1B42]/25 tabular-nums">
+                        {pillar.index}
+                      </span>
                     </div>
-                    <h3 className="sm:col-span-4 font-serif text-[22px] font-bold leading-[1.28] text-[#0F172A]">
+                    <h3 className="sm:col-span-4 font-serif text-[22px] font-bold leading-[1.28] text-[#0B1B42]">
                       {pillar.title}
                     </h3>
-                    <p className="sm:col-span-7 text-[14px] leading-[1.72] text-[#1E293B] font-medium">
+                    <p className="sm:col-span-7 text-[14px] leading-[1.72] text-[#162E68] font-medium">
                       {pillar.description}
                     </p>
                   </div>
@@ -425,29 +430,29 @@ export default function App() {
         {/* Selected Work Section */}
         <section
           id="work"
-          className="w-full border-y border-[#DCE1E8] bg-[#EEF1F5]/85 backdrop-blur-md py-24 md:py-28"
+          className="w-full border-y-2 border-[#0B1B42]/15 bg-[#EBF0F9]/90 backdrop-blur-md py-24 md:py-28"
         >
           <div className="mx-auto max-w-[1240px] px-6 md:px-10">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
               <div>
                 <div className="flex items-center gap-3.5">
-                  <span className="h-[2px] w-7 bg-[#0F172A] shrink-0" aria-hidden="true" />
-                  <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#0F172A] font-bold border border-slate-300 bg-slate-100 px-2.5 py-1">
+                  <span className="h-[3px] w-8 bg-[#F8D501] shrink-0" aria-hidden="true" />
+                  <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#F8D501] font-bold bg-[#0B1B42] px-3 py-1">
                     SELECTED WORK
                   </span>
                 </div>
-                <h2 className="mt-5 font-serif text-[38px] sm:text-[46px] font-normal leading-[1.12] tracking-[-0.015em] text-[#0F172A]">
+                <h2 className="mt-5 font-serif text-[38px] sm:text-[46px] font-normal leading-[1.12] tracking-[-0.015em] text-[#0B1B42]">
                   Proud to partner with
                 </h2>
               </div>
 
-              <p className="max-w-[340px] text-[14px] leading-[1.68] text-[#1E293B] font-medium">
+              <p className="max-w-[380px] text-[14px] leading-[1.68] text-[#0B1B42] font-medium bg-white/90 border-l-4 border-l-[#F8D501] border border-[#0B1B42]/15 px-4 py-3 shadow-xs">
                 A selection of active partnerships across healthcare, retail, real estate, EV mobility, and enterprise software.
               </p>
             </div>
 
-            {/* 3x3 Crisp Bordered Grid with Translucent Elevation */}
-            <div className="border-2 border-slate-300 bg-white/95 backdrop-blur-sm shadow-md">
+            {/* 3x3 Crisp Bordered Grid */}
+            <div className="border-t-4 border-t-[#0B1B42] border-x-2 border-b-2 border-[#0B1B42]/20 bg-white backdrop-blur-sm shadow-md">
               <div className="grid grid-cols-1 md:grid-cols-3">
                 {SELECTED_WORK.map((project, index) => {
                   const isLastRowDesktop = index >= 6;
@@ -457,33 +462,34 @@ export default function App() {
                       key={project.id}
                       type="button"
                       onClick={() => setSelectedProject(project)}
-                      className={`group text-left p-8 md:p-9 min-h-[220px] flex flex-col justify-between transition-colors duration-150 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#0F172A] ${
-                        !isLastItemMobile ? 'border-b border-slate-200' : ''
+                      className={`group text-left p-8 md:p-9 min-h-[220px] flex flex-col justify-between transition-all duration-150 hover:bg-[#FFFDF0] focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#0B1B42] ${
+                        !isLastItemMobile ? 'border-b border-[#0B1B42]/15' : ''
                       } ${isLastRowDesktop ? 'md:border-b-0' : ''} ${
-                        index % 3 !== 2 ? 'md:border-r md:border-slate-200' : ''
+                        index % 3 !== 2 ? 'md:border-r md:border-[#0B1B42]/15' : ''
                       }`}
                     >
                       <div>
                         <div className="flex items-center justify-between gap-4">
                           <GeometricEmblem
                             emblem={project.emblem}
-                            className="h-6 w-6 text-[#0F172A] transition-transform duration-200 group-hover:scale-105"
+                            className="h-6 w-6 text-[#0B1B42] transition-transform duration-200 group-hover:scale-110"
                           />
-                          <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-[#0F172A] font-bold bg-slate-100 border border-slate-300 px-2 py-0.5 tabular-nums">
+                          <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-[#0B1B42] font-extrabold bg-[#F8D501] border border-[#0B1B42]/25 px-2.5 py-0.5 tabular-nums">
                             {project.metricBadge}
                           </span>
                         </div>
 
-                        <h3 className="mt-7 font-serif text-[21px] font-bold leading-[1.25] text-[#0F172A] group-hover:text-[#365679] transition-colors">
+                        <h3 className="mt-7 font-serif text-[21px] font-bold leading-[1.25] text-[#0B1B42] group-hover:text-[#162E68] transition-colors">
                           {project.name}
                         </h3>
-                        <p className="mt-1.5 text-[13px] text-[#1E293B] font-medium">{project.subtitle}</p>
+                        <p className="mt-1.5 text-[13px] text-[#162E68] font-medium">{project.subtitle}</p>
                       </div>
 
-                      <div className="mt-8 pt-4 border-t border-slate-200">
-                        <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#0F172A] font-bold">
+                      <div className="mt-8 pt-4 border-t border-[#0B1B42]/10 flex items-center justify-between">
+                        <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#0B1B42] font-bold">
                           {project.category}
                         </span>
+                        <ArrowUpRight className="h-4 w-4 text-[#0B1B42]/60 group-hover:text-[#0B1B42] transition-colors" />
                       </div>
                     </button>
                   );
@@ -495,7 +501,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => openConsultation('Full Case Studies')}
-                className="font-mono text-[11px] tracking-[0.22em] uppercase text-[#0F172A] font-bold transition-colors duration-150 hover:text-[#365679] py-2 underline"
+                className="font-mono text-[11px] tracking-[0.22em] uppercase text-[#0B1B42] font-bold transition-colors duration-150 hover:bg-[#F8D501] px-4 py-2 border border-transparent hover:border-[#0B1B42] underline underline-offset-4"
               >
                 FULL CASE STUDIES SHARED ON REQUEST →
               </button>
@@ -512,25 +518,25 @@ export default function App() {
           className="mx-auto max-w-[1240px] px-6 md:px-10 py-24 md:py-28"
         >
           <div className="flex items-center gap-3.5 mb-12">
-            <span className="h-[2px] w-7 bg-[#0F172A] shrink-0" aria-hidden="true" />
-            <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#0F172A] font-bold border border-slate-300 bg-slate-100 px-2.5 py-1">
+            <span className="h-[3px] w-8 bg-[#F8D501] shrink-0" aria-hidden="true" />
+            <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#F8D501] font-bold bg-[#0B1B42] px-3 py-1">
               APPROACH
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {APPROACH_STEPS.map((step) => (
+            {APPROACH_STEPS.map((step, idx) => (
               <div
                 key={step.kicker}
-                className="border-t-4 border-t-[#0F172A] bg-white/95 backdrop-blur-sm p-8 border-x-2 border-b-2 border-slate-300 shadow-sm"
+                className="border-t-4 border-t-[#F8D501] bg-white/95 backdrop-blur-sm p-8 border-x-2 border-b-2 border-[#0B1B42]/20 shadow-sm hover:border-[#0B1B42] transition-all"
               >
-                <div className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#0F172A] font-bold">
-                  {step.kicker}
+                <div className="inline-flex items-center gap-2 bg-[#0B1B42] text-[#F8D501] px-2.5 py-1 font-mono text-[10px] tracking-[0.18em] uppercase font-bold">
+                  <span>0{idx + 1} · {step.kicker}</span>
                 </div>
-                <h3 className="mt-3.5 font-serif text-[24px] font-bold leading-[1.25] text-[#0F172A]">
+                <h3 className="mt-4 font-serif text-[24px] font-bold leading-[1.25] text-[#0B1B42]">
                   {step.title}
                 </h3>
-                <p className="mt-4 text-[14px] leading-[1.74] text-[#1E293B] font-medium">
+                <p className="mt-4 text-[14px] leading-[1.74] text-[#162E68] font-medium">
                   {step.description}
                 </p>
               </div>
@@ -541,17 +547,20 @@ export default function App() {
         {/* Authoritative FAQs Accordion */}
         <FaqAccordion />
 
-        {/* Senior Leadership & Editorial Quote Section */}
+        {/* Senior Leadership & Editorial Quote Section with IDM Official Crest */}
         <section className="mx-auto max-w-[1240px] px-6 md:px-10 pb-24 md:pb-28">
-          <div className="border border-[#DCE1E8] bg-white/75 backdrop-blur-md py-14 md:py-18 px-8 sm:px-12 shadow-xs">
+          <div className="border-t-4 border-t-[#F8D501] border-x-2 border-b-2 border-[#0B1B42]/20 bg-white/95 backdrop-blur-md py-14 md:py-18 px-8 sm:px-12 shadow-md">
+            <div className="flex justify-center mb-6">
+              <BrandLogo variant="light" size="lg" />
+            </div>
             <blockquote className="mx-auto max-w-[760px] text-center">
-              <p className="font-serif text-[26px] sm:text-[34px] font-normal leading-[1.32] text-[#141C27] text-balance">
+              <p className="font-serif text-[26px] sm:text-[34px] font-normal leading-[1.32] text-[#0B1B42] text-balance">
                 {SITE_INFO.founderQuote}
               </p>
             </blockquote>
 
             {/* Senior Leadership Duo Grid */}
-            <div className="mt-12 pt-10 border-t-2 border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[900px] mx-auto">
+            <div className="mt-12 pt-10 border-t-2 border-[#0B1B42]/15 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[900px] mx-auto">
               {LEADERSHIP.map((leader) => {
                 const isSanvika = leader.name.toLowerCase().includes('sanvika');
                 const photoSrc = isSanvika ? '/sanvika-avatar.png' : '/founder-raghavendra.jpg';
@@ -559,11 +568,11 @@ export default function App() {
                 return (
                   <div
                     key={leader.name}
-                    className="border-2 border-slate-300 bg-white/95 p-6 flex flex-col justify-between shadow-sm hover:border-[#0F172A] hover:shadow-lg transition-all text-left"
+                    className="border-2 border-[#0B1B42]/20 bg-white p-6 flex flex-col justify-between shadow-sm hover:border-[#0B1B42] hover:shadow-lg transition-all text-left"
                   >
                     <div>
                       <div className="flex items-center gap-4 mb-4">
-                        <div className="h-16 w-16 rounded-full overflow-hidden border-2 border-[#0F172A] bg-slate-100 shrink-0 shadow-xs">
+                        <div className="h-16 w-16 rounded-full overflow-hidden border-2 border-[#0B1B42] ring-2 ring-[#F8D501] bg-[#F4F7FC] shrink-0 shadow-xs">
                           <img
                             src={photoSrc}
                             alt={leader.name}
@@ -571,26 +580,26 @@ export default function App() {
                           />
                         </div>
                         <div>
-                          <div className="flex items-center gap-2">
-                            <h4 className="font-serif text-[20px] font-bold text-[#0F172A]">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <h4 className="font-serif text-[20px] font-bold text-[#0B1B42]">
                               {leader.name}
                             </h4>
-                            <span className="font-mono text-[9px] uppercase tracking-wider text-emerald-950 bg-emerald-100 px-2 py-0.5 border border-emerald-300 font-bold">
+                            <span className="font-mono text-[9px] uppercase tracking-wider text-[#0B1B42] bg-[#F8D501] px-2 py-0.5 border border-[#0B1B42]/25 font-bold">
                               LEADER
                             </span>
                           </div>
-                          <div className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-[#365679] font-bold mt-0.5">
+                          <div className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-[#162E68] font-bold mt-0.5">
                             {leader.role}
                           </div>
                         </div>
                       </div>
 
-                      <p className="mt-2 text-[13.5px] leading-[1.65] text-[#1E293B] font-medium">
+                      <p className="mt-2 text-[13.5px] leading-[1.65] text-[#0F2352] font-medium">
                         {leader.bio}
                       </p>
                     </div>
 
-                    <div className="mt-6 pt-3.5 border-t border-slate-200 flex items-center justify-between text-[11px] font-mono text-[#0F172A]">
+                    <div className="mt-6 pt-3.5 border-t border-[#0B1B42]/15 flex items-center justify-between text-[11px] font-mono text-[#0B1B42]">
                       <span className="font-bold">IDM SMART TECH</span>
                       <a
                         href={`https://wa.me/918519837818?text=${encodeURIComponent(
@@ -598,9 +607,9 @@ export default function App() {
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-emerald-800 hover:text-emerald-950 font-bold inline-flex items-center gap-1.5"
+                        className="text-[#0B1B42] bg-[#F8D501] hover:bg-[#0B1B42] hover:text-[#F8D501] px-3 py-1 border border-[#0B1B42]/30 font-bold inline-flex items-center gap-1.5 transition-colors"
                       >
-                        <MessageCircle className="h-3.5 w-3.5 text-emerald-700" />
+                        <MessageCircle className="h-3.5 w-3.5" />
                         <span>CHAT ON WHATSAPP →</span>
                       </a>
                     </div>
@@ -612,20 +621,20 @@ export default function App() {
         </section>
       </main>
 
-      {/* Comprehensive Dark Navy CTA & Footer with Real Contact & Location Data */}
-      <footer id="contact" className="relative z-10 w-full bg-[#0E1521] text-white">
+      {/* Comprehensive IDM Brand Navy CTA & Footer with Logo Seal */}
+      <footer id="contact" className="relative z-10 w-full bg-[#071330] text-white border-t-4 border-t-[#F8D501]">
         <div className="mx-auto max-w-[1240px] px-6 md:px-10">
           {/* Upper Conversion Block */}
           <div className="pt-24 pb-20 md:pt-28 md:pb-24 flex flex-col lg:flex-row lg:items-end justify-between gap-10">
             <div>
-              <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-[#64748B]">
+              <div className="inline-block bg-[#F8D501] text-[#0B1B42] font-mono text-[10px] tracking-[0.2em] uppercase font-bold px-3 py-1">
                 FOR AMBITIOUS BRANDS
               </div>
               <h2 className="mt-5 font-serif text-[40px] sm:text-[54px] font-normal leading-[1.12] tracking-[-0.015em] text-white text-balance max-w-[640px]">
                 Let&apos;s build your{' '}
-                <span className="italic text-[#5B84B1]">success</span> story.
+                <span className="italic text-[#F8D501] font-medium">success</span> story.
               </h2>
-              <p className="mt-4 text-[14.5px] text-[#94A3B8] max-w-[500px]">
+              <p className="mt-4 text-[15px] text-slate-200 max-w-[500px]">
                 Direct consultation with senior practitioners. No junior handoffs, no fluff.
               </p>
             </div>
@@ -634,16 +643,16 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => openConsultation()}
-                className="inline-flex items-center justify-center border border-white/75 bg-white text-[#0E1521] px-7 py-3.5 font-mono text-[10.5px] tracking-[0.16em] uppercase whitespace-nowrap font-medium hover:bg-slate-200 transition-colors"
+                className="inline-flex items-center justify-center border-2 border-[#F8D501] bg-[#F8D501] text-[#0B1B42] px-7 py-3.5 font-mono text-[11px] tracking-[0.16em] uppercase whitespace-nowrap font-extrabold hover:bg-white hover:border-white transition-colors shadow-md"
               >
-                REQUEST CONSULTATION
+                REQUEST CONSULTATION →
               </button>
 
               <a
                 href={SITE_INFO.whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-emerald-500 bg-emerald-600/20 text-emerald-300 px-6 py-3.5 font-mono text-[10.5px] tracking-[0.16em] uppercase hover:bg-emerald-600 hover:text-white transition-all"
+                className="inline-flex items-center gap-2 border-2 border-[#F8D501]/80 bg-[#0B1B42] text-[#F8D501] px-6 py-3.5 font-mono text-[11px] tracking-[0.16em] uppercase font-bold hover:bg-[#F8D501] hover:text-[#0B1B42] transition-all"
               >
                 <MessageCircle className="h-4 w-4" />
                 <span>CHAT ON WHATSAPP</span>
@@ -651,17 +660,15 @@ export default function App() {
             </div>
           </div>
 
-          {/* 4-Column Footer Directory with Full Contact, Maps, and Verified Badges */}
-          <div className="border-t border-white/10 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          {/* 4-Column Footer Directory with Official IDM Logo Badge */}
+          <div className="border-t border-white/15 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
             {/* Col 1: Brand & Credentials */}
             <div>
-              <span className="font-serif text-[19px] text-white font-medium">
-                {SITE_INFO.brand}
-              </span>
-              <p className="mt-3 text-[13px] leading-[1.7] text-[#94A3B8]">
+              <BrandLogo variant="dark-badge" size="md" showWordmark showTagline />
+              <p className="mt-4 text-[13px] leading-[1.7] text-slate-300">
                 AI-powered digital marketing &amp; full-stack technology agency headquartered in Shamshabad, Hyderabad. Led by Raghavendra Goud &amp; Bantaram Sanvika.
               </p>
-              <div className="mt-4 flex items-center gap-2 text-[12px] text-emerald-400 font-mono">
+              <div className="mt-4 flex items-center gap-2 text-[12px] text-[#F8D501] font-mono font-bold">
                 <ShieldCheck className="h-4 w-4" />
                 <span>Google &amp; Meta Partner</span>
               </div>
@@ -669,24 +676,24 @@ export default function App() {
 
             {/* Col 2: Physical Office & Google Maps Link */}
             <div>
-              <div className="font-mono text-[9.5px] tracking-[0.18em] uppercase text-[#64748B]">
+              <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#F8D501] font-bold">
                 OFFICE &amp; LOCATION
               </div>
-              <div className="mt-3.5 space-y-2 text-[13px] text-[#CBD5E1]">
+              <div className="mt-3.5 space-y-2 text-[13px] text-slate-200">
                 <p className="leading-[1.6]">{SITE_INFO.addressFull}</p>
                 <div className="pt-1">
                   <a
                     href={SITE_INFO.googleMapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-white transition-colors text-[12px] font-mono tracking-wider"
+                    className="inline-flex items-center gap-1.5 text-[#F8D501] hover:text-white transition-colors text-[12px] font-mono tracking-wider font-bold"
                   >
                     <MapPin className="h-3.5 w-3.5" />
                     <span>VIEW ON GOOGLE MAPS →</span>
                   </a>
                 </div>
-                <div className="pt-2 text-[11.5px] text-[#94A3B8] flex items-center gap-1.5">
-                  <Clock className="h-3.5 w-3.5" />
+                <div className="pt-2 text-[12px] text-slate-300 flex items-center gap-1.5">
+                  <Clock className="h-3.5 w-3.5 text-[#F8D501]" />
                   <span>{SITE_INFO.businessHours}</span>
                 </div>
               </div>
@@ -694,25 +701,25 @@ export default function App() {
 
             {/* Col 3: Direct Inquiries & WhatsApp */}
             <div>
-              <div className="font-mono text-[9.5px] tracking-[0.18em] uppercase text-[#64748B]">
+              <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#F8D501] font-bold">
                 DIRECT CHANNELS
               </div>
-              <div className="mt-3.5 space-y-2.5 text-[13px] text-[#CBD5E1]">
+              <div className="mt-3.5 space-y-2.5 text-[13px] text-slate-200">
                 <div>
                   <a
                     href={`mailto:${SITE_INFO.email}`}
-                    className="inline-flex items-center gap-2 transition-colors hover:text-white"
+                    className="inline-flex items-center gap-2 transition-colors hover:text-[#F8D501]"
                   >
-                    <Mail className="h-3.5 w-3.5 text-[#64748B]" />
+                    <Mail className="h-3.5 w-3.5 text-[#F8D501]" />
                     <span>{SITE_INFO.email}</span>
                   </a>
                 </div>
                 <div>
                   <a
                     href={SITE_INFO.phoneHref}
-                    className="inline-flex items-center gap-2 tabular-nums transition-colors hover:text-white"
+                    className="inline-flex items-center gap-2 tabular-nums transition-colors hover:text-[#F8D501]"
                   >
-                    <Phone className="h-3.5 w-3.5 text-[#64748B]" />
+                    <Phone className="h-3.5 w-3.5 text-[#F8D501]" />
                     <span>{SITE_INFO.phoneDisplay}</span>
                   </a>
                 </div>
@@ -721,13 +728,13 @@ export default function App() {
                     href={SITE_INFO.whatsappHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-emerald-400 transition-colors hover:text-white font-medium"
+                    className="inline-flex items-center gap-2 text-[#F8D501] transition-colors hover:text-white font-bold"
                   >
                     <MessageCircle className="h-3.5 w-3.5" />
                     <span>WhatsApp Direct (+91 85198 37818)</span>
                   </a>
                 </div>
-                <p className="text-[11.5px] text-[#64748B] pt-1">
+                <p className="text-[11.5px] text-slate-300 pt-1">
                   Response SLA: {SITE_INFO.responseSla}
                 </p>
               </div>
@@ -735,30 +742,30 @@ export default function App() {
 
             {/* Col 4: Full Capabilities Stack */}
             <div>
-              <div className="font-mono text-[9.5px] tracking-[0.18em] uppercase text-[#64748B]">
+              <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#F8D501] font-bold">
                 CAPABILITIES
               </div>
-              <div className="mt-3.5 space-y-1.5 text-[13px] text-[#CBD5E1]">
+              <div className="mt-3.5 space-y-1.5 text-[13px] text-slate-200">
                 <p>SEO &amp; Local 3-Pack Maps</p>
                 <p>Google &amp; Meta ROI Ads</p>
                 <p>Websites &amp; Headless E-Comm</p>
                 <p>Flutter &amp; React Native Apps</p>
                 <p>Custom ERP &amp; CRM Architecture</p>
-                <p className="text-[#94A3B8]">WhatsApp AI Lead Pipelines</p>
+                <p className="text-[#F8D501] font-medium">WhatsApp AI Lead Pipelines</p>
               </div>
             </div>
           </div>
 
-          {/* Bottom Legal Row */}
-          <div className="border-t border-white/10 py-7 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[10px] tracking-[0.18em] uppercase text-[#64748B]">
+          {/* Bottom Legal Row — Positioned clear of the bottom-right floating Founder Avatar */}
+          <div className="border-t border-white/15 pt-7 pb-24 sm:pb-8 md:pr-[440px] flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center justify-start gap-x-6 gap-y-3 font-mono text-[10px] tracking-[0.18em] uppercase text-slate-300">
             <div>© 2026 IDM SMART TECH. ALL RIGHTS RESERVED.</div>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <span>GOOGLE &amp; META PARTNER</span>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="text-[#F8D501] font-bold">GOOGLE &amp; META PARTNER</span>
               <span aria-hidden="true">·</span>
               <button
                 type="button"
                 onClick={() => setLegalTab('privacy')}
-                className="transition-colors hover:text-white uppercase"
+                className="transition-colors hover:text-[#F8D501] uppercase"
               >
                 PRIVACY POLICY
               </button>
@@ -766,7 +773,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => setLegalTab('terms')}
-                className="transition-colors hover:text-white uppercase"
+                className="transition-colors hover:text-[#F8D501] uppercase"
               >
                 TERMS OF SERVICE
               </button>

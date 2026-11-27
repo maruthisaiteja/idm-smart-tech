@@ -19,43 +19,45 @@ export function FaqAccordion() {
         {/* Left Column: Title & Context */}
         <div className="lg:col-span-4">
           <div className="flex items-center gap-3.5">
-            <span className="h-[2px] w-7 bg-[#0F172A] shrink-0" aria-hidden="true" />
-            <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#0F172A] font-bold">
+            <span className="h-[3px] w-8 bg-[#F8D501] shrink-0" aria-hidden="true" />
+            <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#F8D501] font-bold bg-[#0B1B42] px-3 py-1">
               CLARITY &amp; TRUST
             </span>
           </div>
 
-          <h2 className="mt-4 font-serif text-[36px] sm:text-[46px] font-normal leading-[1.12] tracking-[-0.015em] text-[#0F172A]">
+          <h2 className="mt-4 font-serif text-[36px] sm:text-[46px] font-normal leading-[1.12] tracking-[-0.015em] text-[#0B1B42]">
             Frequently Asked{' '}
-            <span className="italic text-[#365679] font-medium">Questions</span>
+            <span className="italic font-semibold underline decoration-[#F8D501] decoration-[5px] underline-offset-4">
+              Questions
+            </span>
           </h2>
 
-          <p className="mt-4 text-[14px] leading-[1.7] text-[#1E293B] font-medium">
+          <p className="mt-4 text-[14px] leading-[1.7] text-[#0F2352] font-medium">
             Straightforward answers regarding our local SEO methodology, rankings, contracts, and execution timelines.
           </p>
 
-          <div className="mt-8 border-2 border-slate-300 bg-white/95 backdrop-blur-sm p-6 space-y-3 shadow-xs">
-            <div className="flex items-center gap-2 text-[12px] font-mono uppercase tracking-wider text-[#0F172A] font-bold">
-              <HelpCircle className="h-4 w-4 text-[#365679]" />
+          <div className="mt-8 border-t-4 border-t-[#F8D501] border-x-2 border-b-2 border-[#0B1B42]/20 bg-white/95 backdrop-blur-sm p-6 space-y-3 shadow-sm">
+            <div className="flex items-center gap-2 text-[12px] font-mono uppercase tracking-wider text-[#0B1B42] font-bold">
+              <HelpCircle className="h-4 w-4 text-[#0B1B42]" />
               <span>Have an unlisted query?</span>
             </div>
-            <p className="text-[13px] text-[#1E293B] leading-[1.6] font-medium">
+            <p className="text-[13px] text-[#0F2352] leading-[1.6] font-medium">
               Ask directly to our co-founder without going through sales representatives.
             </p>
             <a
               href="https://wa.me/918519837818?text=Hi%20Sanvika%2C%20I%20have%20a%20question%20regarding%20IDM%20services"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-emerald-900 hover:text-emerald-950 font-mono text-[11px] font-bold tracking-wider pt-1 transition-colors"
+              className="inline-flex items-center gap-2 bg-[#0B1B42] hover:bg-[#162E68] text-[#F8D501] px-4 py-2.5 font-mono text-[11px] font-extrabold tracking-wider transition-colors"
             >
-              <MessageCircle className="h-4 w-4 text-emerald-700" />
-              <span>CHAT WITH FOUNDER ON WHATSAPP →</span>
+              <MessageCircle className="h-4 w-4" />
+              <span>CHAT WITH FOUNDER →</span>
             </a>
           </div>
         </div>
 
         {/* Right Column: Interactive Accordion */}
-        <div className="lg:col-span-8 border-2 border-slate-300 bg-white/95 backdrop-blur-md shadow-md divide-y divide-slate-200">
+        <div className="lg:col-span-8 border-2 border-[#0B1B42]/20 bg-white/95 backdrop-blur-md shadow-md divide-y divide-[#0B1B42]/15">
           {FAQS.map((faq, index) => {
             const isOpen = openId === faq.id;
             return (
@@ -64,22 +66,24 @@ export function FaqAccordion() {
                   type="button"
                   onClick={() => toggleItem(faq.id)}
                   aria-expanded={isOpen}
-                  className="w-full text-left p-6 sm:p-7 flex items-start justify-between gap-4 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#0F172A] hover:bg-slate-50 transition-colors"
+                  className="w-full text-left p-6 sm:p-7 flex items-start justify-between gap-4 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#0B1B42] hover:bg-[#FFFDF2] transition-colors"
                 >
                   <div className="space-y-2 pr-2">
                     {faq.category && (
-                      <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#0F172A] font-bold">
+                      <span className="inline-block font-mono text-[10px] tracking-[0.16em] uppercase text-[#0B1B42] font-bold bg-[#F8D501]/70 px-2 py-0.5">
                         0{index + 1} · {faq.category}
                       </span>
                     )}
-                    <h3 className="font-serif text-[19px] sm:text-[21px] font-semibold leading-[1.3] text-[#0F172A]">
+                    <h3 className="font-serif text-[19px] sm:text-[21px] font-bold leading-[1.3] text-[#0B1B42]">
                       {faq.question}
                     </h3>
                   </div>
 
                   <span
-                    className={`shrink-0 mt-1 inline-flex h-8 w-8 items-center justify-center border-2 border-slate-300 bg-white text-[#0F172A] transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 bg-[#0F172A] text-white border-[#0F172A]' : ''
+                    className={`shrink-0 mt-1 inline-flex h-8 w-8 items-center justify-center border-2 transition-transform duration-200 ${
+                      isOpen
+                        ? 'rotate-180 bg-[#0B1B42] text-[#F8D501] border-[#0B1B42]'
+                        : 'bg-white text-[#0B1B42] border-[#0B1B42]/30'
                     }`}
                   >
                     <ChevronDown className="h-4 w-4" />
@@ -87,7 +91,7 @@ export function FaqAccordion() {
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pb-7 sm:px-7 sm:pb-8 pt-1 text-[14px] sm:text-[14.5px] leading-[1.78] text-[#1E293B] font-medium border-t border-slate-100">
+                  <div className="px-6 pb-7 sm:px-7 sm:pb-8 pt-3 text-[14px] sm:text-[14.5px] leading-[1.78] text-[#0F2352] font-medium border-t border-[#0B1B42]/10 bg-[#F4F7FC]/60">
                     <p>{faq.answer}</p>
                   </div>
                 )}
