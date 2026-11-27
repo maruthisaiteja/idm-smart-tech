@@ -1,25 +1,100 @@
+import { useRef } from 'react';
 import { Check, MessageCircle, ArrowUpRight, Zap, Star } from 'lucide-react';
 import { GROWTH_PACKAGES, type GrowthPackageItem } from '../data/idmContent';
 import { BrandLogo } from './BrandLogo';
+import { gsap, useGSAP } from '../lib/gsapSetup';
 
 interface GrowthPackagesProps {
   onOpenConsultation?: (packageName: string) => void;
 }
 
 export function GrowthPackages({ onOpenConsultation }: GrowthPackagesProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add(
+        {
+          isDesktop: '(min-width: 1024px)',
+          isMobile: '(max-width: 1023px)',
+        },
+        (context) => {
+          const { isDesktop } = context.conditions as { isDesktop: boolean };
+          const yOffset = isDesktop ? 34 : 18;
+
+          gsap.from('[data-packages-header]', {
+            y: 22,
+            opacity: 0,
+            duration: 0.65,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 90%',
+              once: true,
+            },
+          });
+
+          gsap.from('[data-package-card]', {
+            y: yOffset,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: '[data-packages-grid]',
+              start: 'top 90%',
+              once: true,
+            },
+          });
+
+          gsap.to('[data-pro-badge]', {
+            boxShadow: '0 0 18px rgba(248, 213, 1, 0.75)',
+            duration: 1.4,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+          });
+
+          gsap.from('[data-enterprise-banner]', {
+            y: 20,
+            opacity: 0,
+            duration: 0.6,
+            ease: 'power2.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: '[data-enterprise-banner]',
+              start: 'top 94%',
+              once: true,
+            },
+          });
+        }
+      );
+
+      return () => mm.revert();
+    },
+    { scope: sectionRef }
+  );
+
   const getWhatsAppHref = (pkg: GrowthPackageItem) => {
     return `https://wa.me/918519837818?text=${encodeURIComponent(pkg.whatsappMessage)}`;
   };
 
   return (
     <section
+      ref={sectionRef}
       id="packages"
       aria-label="Growth Packages & Retainers"
       className="w-full border-y-2 border-[#0B1B42]/15 bg-[#F4F7FC]/88 backdrop-blur-md py-24 md:py-28"
     >
       <div className="mx-auto max-w-[1240px] px-6 md:px-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+        <div
+          data-packages-header
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14"
+        >
           <div>
             <div className="flex items-center gap-3.5">
               <span className="h-[3px] w-8 bg-[#F8D501] shrink-0" aria-hidden="true" />
@@ -45,13 +120,17 @@ export function GrowthPackages({ onOpenConsultation }: GrowthPackagesProps) {
         </div>
 
         {/* 4-Tier Cards Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+        <div
+          data-packages-grid
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch"
+        >
           {GROWTH_PACKAGES.map((pkg) => {
             const isPopular = Boolean(pkg.isPopular);
 
             return (
               <div
                 key={pkg.id}
+                data-package-card
                 className={`relative flex flex-col justify-between transition-all duration-300 p-7 ${
                   isPopular
                     ? 'border-2 border-[#F8D501] bg-[#0B1B42] text-white shadow-2xl -translate-y-1 lg:-translate-y-2 ring-2 ring-[#0B1B42]'
@@ -60,7 +139,10 @@ export function GrowthPackages({ onOpenConsultation }: GrowthPackagesProps) {
               >
                 {/* Popularity Badge */}
                 {isPopular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#F8D501] text-[#0B1B42] px-4 py-1 font-mono text-[9.5px] tracking-[0.2em] uppercase font-extrabold flex items-center gap-1.5 shadow-md border-2 border-[#0B1B42] whitespace-nowrap">
+                  <div
+                    data-pro-badge
+                    className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#F8D501] text-[#0B1B42] px-4 py-1 font-mono text-[9.5px] tracking-[0.2em] uppercase font-extrabold flex items-center gap-1.5 shadow-md border-2 border-[#0B1B42] whitespace-nowrap"
+                  >
                     <Star className="h-3 w-3 fill-[#0B1B42] text-[#0B1B42]" />
                     <span>MOST POPULAR</span>
                   </div>
@@ -200,7 +282,10 @@ export function GrowthPackages({ onOpenConsultation }: GrowthPackagesProps) {
         </div>
 
         {/* Bottom Enterprise Banner with Official IDM Logo */}
-        <div className="mt-12 border-t-4 border-t-[#F8D501] border-x-2 border-b-2 border-[#0B1B42]/20 bg-white/95 backdrop-blur-sm p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-md">
+        <div
+          data-enterprise-banner
+          className="mt-12 border-t-4 border-t-[#F8D501] border-x-2 border-b-2 border-[#0B1B42]/20 bg-white/95 backdrop-blur-sm p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-md"
+        >
           <div className="flex items-center gap-4">
             <BrandLogo variant="light" size="md" className="hidden sm:inline-flex" />
             <div className="space-y-1">

@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useLenis } from 'lenis/react';
+import { gsap, ScrollTrigger, useGSAP } from './lib/gsapSetup';
 import {
   Menu,
   X,
@@ -41,6 +43,229 @@ export default function App() {
   const [consultationTopic, setConsultationTopic] = useState('');
   const [legalTab, setLegalTab] = useState<LegalTab>(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const pageRef = useRef<HTMLDivElement>(null);
+  const lenis = useLenis();
+
+  // Pause Lenis smooth scrolling cleanly while any full-screen dialog is open
+  useEffect(() => {
+    const hasModal = Boolean(selectedProject || consultationOpen || legalTab);
+    if (!lenis || !hasModal) return;
+    lenis.stop();
+    return () => {
+      lenis.start();
+    };
+  }, [lenis, selectedProject, consultationOpen, legalTab]);
+
+  // Scoped GSAP & ScrollTrigger choreography across main editorial sections
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+
+      // Continuous Gold Scroll Progress Ribbon in Header
+      gsap.fromTo(
+        '[data-scroll-progress]',
+        { scaleX: 0.05 },
+        {
+          scaleX: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: document.documentElement,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: true,
+          },
+        }
+      );
+
+      mm.add(
+        {
+          isDesktop: '(min-width: 1024px)',
+          isMobile: '(max-width: 1023px)',
+        },
+        (context) => {
+          const { isDesktop } = context.conditions as { isDesktop: boolean };
+          const yOffset = isDesktop ? 28 : 16;
+
+          // 1. Hero Above-the-Fold Staggered Sequence
+          gsap.from('[data-hero-reveal]', {
+            y: isDesktop ? 24 : 14,
+            opacity: 0,
+            duration: 0.72,
+            stagger: 0.08,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+          });
+
+          // 2. Hero Performance Counters (500+, 320%, 180+, 12+)
+          const statNodes = gsap.utils.toArray<HTMLElement>('[data-stat-value]');
+          if (statNodes.length > 0) {
+            gsap.from('[data-hero-stat]', {
+              y: 20,
+              opacity: 0,
+              duration: 0.6,
+              stagger: 0.08,
+              ease: 'power3.out',
+              clearProps: 'transform,opacity',
+              scrollTrigger: {
+                trigger: '[data-hero-stats]',
+                start: 'top 92%',
+                once: true,
+              },
+            });
+
+            statNodes.forEach((node) => {
+              const raw = node.dataset.target || '';
+              const match = raw.match(/^(\d+)(.*)$/);
+              if (!match) return;
+              const endVal = parseInt(match[1], 10);
+              const suffix = match[2] || '';
+              const counter = { value: 0 };
+
+              gsap.to(counter, {
+                value: endVal,
+                duration: 1.35,
+                ease: 'power2.out',
+                scrollTrigger: {
+                  trigger: '[data-hero-stats]',
+                  start: 'top 92%',
+                  once: true,
+                },
+                onUpdate: () => {
+                  node.textContent = `${Math.round(counter.value)}${suffix}`;
+                },
+                onComplete: () => {
+                  node.textContent = raw;
+                },
+              });
+            });
+          }
+
+          // 3. Client Partners Royal Navy Band
+          gsap.from('[data-client-item]', {
+            y: 16,
+            opacity: 0,
+            duration: 0.55,
+            stagger: 0.045,
+            ease: 'power2.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: '[data-client-strip]',
+              start: 'top 92%',
+              once: true,
+            },
+          });
+
+          // 4. Mission Pillars Progressive Reveal & Gold Index Detent
+          const pillars = gsap.utils.toArray<HTMLElement>('[data-mission-pillar]');
+          if (pillars.length > 0) {
+            gsap.from(pillars, {
+              y: yOffset,
+              opacity: 0,
+              duration: 0.65,
+              stagger: 0.1,
+              ease: 'power3.out',
+              clearProps: 'transform,opacity',
+              scrollTrigger: {
+                trigger: '[data-mission-card]',
+                start: 'top 88%',
+                once: true,
+              },
+            });
+
+            pillars.forEach((pillar) => {
+              const badge = pillar.querySelector('[data-pillar-badge]');
+              if (!badge) return;
+              gsap.from(badge, {
+                scale: 0.85,
+                duration: 0.45,
+                ease: 'back.out(1.7)',
+                clearProps: 'transform',
+                scrollTrigger: {
+                  trigger: pillar,
+                  start: 'top 82%',
+                  once: true,
+                },
+              });
+            });
+          }
+
+          // 5. Selected Work 3x3 Wave Stagger
+          gsap.from('[data-work-card]', {
+            y: yOffset,
+            opacity: 0,
+            duration: 0.65,
+            stagger: { amount: 0.4, from: 'start' },
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: '[data-work-grid]',
+              start: 'top 88%',
+              once: true,
+            },
+          });
+
+          // 6. Approach Section Gold Track + 3-Step Stagger
+          gsap.from('[data-approach-line]', {
+            scaleX: 0,
+            transformOrigin: 'left center',
+            duration: 0.85,
+            ease: 'power3.out',
+            clearProps: 'transform',
+            scrollTrigger: {
+              trigger: '[data-approach-grid]',
+              start: 'top 90%',
+              once: true,
+            },
+          });
+
+          gsap.from('[data-approach-card]', {
+            y: yOffset,
+            opacity: 0,
+            duration: 0.68,
+            stagger: 0.12,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: '[data-approach-grid]',
+              start: 'top 88%',
+              once: true,
+            },
+          });
+
+          // 7. Senior Leadership Crest, Quote & Dual Cards
+          gsap.from('[data-leader-header]', {
+            y: 22,
+            opacity: 0,
+            duration: 0.7,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: '[data-leadership-section]',
+              start: 'top 88%',
+              once: true,
+            },
+          });
+
+          gsap.from('[data-leader-card]', {
+            y: yOffset,
+            opacity: 0,
+            duration: 0.68,
+            stagger: 0.14,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: '[data-leader-grid]',
+              start: 'top 88%',
+              once: true,
+            },
+          });
+        }
+      );
+
+      return () => mm.revert();
+    },
+    { scope: pageRef }
+  );
 
   const openConsultation = (topic = '') => {
     setSelectedProject(null);
@@ -57,15 +282,24 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-transparent text-[#0B1B42] flex flex-col selection:bg-[#F8D501] selection:text-[#0B1B42]">
+    <div
+      ref={pageRef}
+      className="relative min-h-screen bg-transparent text-[#0B1B42] flex flex-col selection:bg-[#F8D501] selection:text-[#0B1B42]"
+    >
       {/* Scroll-driven 300-Frame Animation Canvas with IDM Color Grading */}
       <ScrollCanvas />
 
       {/* Floating 3D Dynamic Founder Avatar & Captive Lead Widget (Bantaram Sanvika) */}
       <FounderAvatarWidget onOpenConsultation={openConsultation} />
 
-      {/* Top Navigation Bar */}
-      <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-t-[3px] border-t-[#F8D501] border-b-2 border-[#0B1B42]/15 transition-colors shadow-sm">
+      {/* Top Navigation Bar with Scroll Progress Track */}
+      <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b-2 border-[#0B1B42]/15 transition-colors shadow-sm">
+        <div className="h-[3px] w-full bg-[#0B1B42]/10 overflow-hidden">
+          <div
+            data-scroll-progress
+            className="h-full w-full bg-[#F8D501] origin-left scale-x-[0.05] will-change-transform"
+          />
+        </div>
         <div className="mx-auto flex h-20 max-w-[1240px] items-center justify-between gap-8 px-6 md:px-10">
           {/* Zone 1: Authentic Company Logo + Brand Wordmark */}
           <a
@@ -235,7 +469,10 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center min-h-[64vh]">
             {/* Left 7 Columns: Hero Editorial Content */}
             <div className="lg:col-span-7 flex flex-col justify-center z-10 bg-white/80 lg:bg-transparent backdrop-blur-sm lg:backdrop-blur-none p-5 sm:p-6 lg:p-0 border border-[#0B1B42]/15 lg:border-0 shadow-xs lg:shadow-none">
-              <div className="inline-flex items-center gap-2.5 border-2 border-[#F8D501]/80 bg-[#0B1B42] px-3.5 py-1.5 w-fit shadow-sm">
+              <div
+                data-hero-reveal
+                className="inline-flex items-center gap-2.5 border-2 border-[#F8D501]/80 bg-[#0B1B42] px-3.5 py-1.5 w-fit shadow-sm"
+              >
                 <span className="h-2 w-2 rounded-full bg-[#F8D501] animate-pulse" />
                 <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-white font-bold">
                   HYDERABAD &amp; GLOBAL ·{' '}
@@ -243,7 +480,10 @@ export default function App() {
                 </span>
               </div>
 
-              <h1 className="mt-6 sm:mt-7 font-serif text-[36px] sm:text-[54px] lg:text-[70px] font-normal leading-[1.08] sm:leading-[1.05] tracking-[-0.025em] text-[#0B1B42] text-balance">
+              <h1
+                data-hero-reveal
+                className="mt-6 sm:mt-7 font-serif text-[36px] sm:text-[54px] lg:text-[70px] font-normal leading-[1.08] sm:leading-[1.05] tracking-[-0.025em] text-[#0B1B42] text-balance"
+              >
                 We turn technology into{' '}
                 <span className="block sm:inline">
                   <span className="italic font-semibold text-[#0B1B42] underline decoration-[#F8D501] decoration-[6px] underline-offset-4">
@@ -253,15 +493,21 @@ export default function App() {
                 </span>
               </h1>
 
-              <p className="mt-5 sm:mt-6 max-w-[540px] text-[15.5px] sm:text-[17px] leading-[1.74] text-[#0F2352] font-medium">
+              <p
+                data-hero-reveal
+                className="mt-5 sm:mt-6 max-w-[540px] text-[15.5px] sm:text-[17px] leading-[1.74] text-[#0F2352] font-medium"
+              >
                 {SITE_INFO.heroLead}
               </p>
 
-              <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+              <div
+                data-hero-reveal
+                className="mt-8 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4"
+              >
                 <button
                   type="button"
                   onClick={() => openConsultation()}
-                  className="w-full sm:w-auto inline-flex items-center justify-center border-2 border-[#0B1B42] bg-[#0B1B42] px-7 py-3.5 font-mono text-[11px] tracking-[0.16em] uppercase text-[#F8D501] font-extrabold whitespace-nowrap shadow-md hover:bg-[#162E68] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B1B42]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center border-2 border-[#0B1B42] bg-[#0B1B42] px-7 py-3.5 font-mono text-[11px] tracking-[0.16em] uppercase text-[#F8D501] font-extrabold whitespace-nowrap shadow-md hover:bg-[#162E68] active:scale-[0.98] transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B1B42]"
                 >
                   START A PROJECT →
                 </button>
@@ -270,7 +516,7 @@ export default function App() {
                   href={SITE_INFO.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-[#0B1B42] bg-[#F8D501] px-6 py-3.5 font-mono text-[11px] tracking-[0.16em] uppercase text-[#0B1B42] font-extrabold hover:bg-[#E5C300] transition-all shadow-sm"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-[#0B1B42] bg-[#F8D501] px-6 py-3.5 font-mono text-[11px] tracking-[0.16em] uppercase text-[#0B1B42] font-extrabold hover:bg-[#E5C300] active:scale-[0.98] transition-all shadow-sm"
                 >
                   <MessageCircle className="h-4 w-4 text-[#0B1B42]" />
                   <span>WHATSAPP DIRECT</span>
@@ -286,7 +532,10 @@ export default function App() {
               </div>
 
               {/* Quick Trust Credentials Strip on Left */}
-              <div className="mt-9 pt-5 border-t-2 border-[#0B1B42]/15 flex flex-wrap items-center gap-x-6 gap-y-2 text-[12.5px] text-[#0B1B42]">
+              <div
+                data-hero-reveal
+                className="mt-9 pt-5 border-t-2 border-[#0B1B42]/15 flex flex-wrap items-center gap-x-6 gap-y-2 text-[12.5px] text-[#0B1B42]"
+              >
                 <div className="flex items-center gap-1.5 font-bold text-[#0B1B42]">
                   <Star className="h-4 w-4 fill-[#F8D501] text-[#0B1B42]" />
                   <span>4.9 / 5 Rating</span>
@@ -311,10 +560,17 @@ export default function App() {
           </div>
 
           {/* 4-Column Performance Metrics Bar */}
-          <div className="mt-14 border-t-4 border-t-[#F8D501] border-x-2 border-b-2 border-[#0B1B42]/20 bg-white/95 backdrop-blur-md shadow-md grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#0B1B42]/15">
+          <div
+            data-hero-stats
+            className="mt-14 border-t-4 border-t-[#F8D501] border-x-2 border-b-2 border-[#0B1B42]/20 bg-white/95 backdrop-blur-md shadow-md grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#0B1B42]/15"
+          >
             {HERO_STATS.map((stat) => (
-              <div key={stat.label} className="p-6 sm:p-7">
-                <div className="font-serif text-[34px] sm:text-[40px] leading-none text-[#0B1B42] tabular-nums font-bold">
+              <div key={stat.label} data-hero-stat className="p-6 sm:p-7">
+                <div
+                  data-stat-value
+                  data-target={stat.value}
+                  className="font-serif text-[34px] sm:text-[40px] leading-none text-[#0B1B42] tabular-nums font-bold"
+                >
                   {stat.value}
                 </div>
                 <div className="mt-2.5 font-mono text-[10px] tracking-[0.18em] uppercase text-[#162E68] font-bold flex items-center gap-2">
@@ -329,6 +585,7 @@ export default function App() {
         {/* Client Logo Strip Band — Signature Deep Royal Navy & Gold */}
         <section
           aria-label="Client partners"
+          data-client-strip
           className="w-full border-y-2 border-[#F8D501] bg-[#0B1B42] text-white py-8 md:py-10 shadow-md"
         >
           <div className="mx-auto max-w-[1240px] px-6 md:px-10 space-y-5">
@@ -337,8 +594,9 @@ export default function App() {
                 <button
                   key={client.id}
                   type="button"
+                  data-client-item
                   onClick={() => openProjectById(client.id)}
-                  className="inline-flex items-center gap-2.5 text-white/90 transition-colors duration-150 hover:text-[#F8D501] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F8D501]"
+                  className="inline-flex items-center gap-2.5 text-white/90 transition-all duration-150 hover:text-[#F8D501] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F8D501]"
                 >
                   <GeometricEmblem emblem={client.emblem} className="h-4 w-4 text-[#F8D501]" />
                   <span className="font-serif text-[15px] font-medium whitespace-nowrap">
@@ -352,8 +610,9 @@ export default function App() {
                 <button
                   key={client.id}
                   type="button"
+                  data-client-item
                   onClick={() => openProjectById(client.id)}
-                  className="inline-flex items-center gap-2.5 text-white/90 transition-colors duration-150 hover:text-[#F8D501] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F8D501]"
+                  className="inline-flex items-center gap-2.5 text-white/90 transition-all duration-150 hover:text-[#F8D501] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F8D501]"
                 >
                   <GeometricEmblem emblem={client.emblem} className="h-4 w-4 text-[#F8D501]" />
                   <span className="font-serif text-[15px] font-medium whitespace-nowrap">
@@ -374,8 +633,8 @@ export default function App() {
           className="mx-auto max-w-[1240px] px-6 md:px-10 py-24 md:py-32"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
-            {/* Left Column */}
-            <div className="lg:col-span-4">
+            {/* Left Column — Sticky under Navbar on Desktop */}
+            <div className="lg:col-span-4 lg:sticky lg:top-28">
               <div className="flex items-center gap-3.5">
                 <span className="h-[3px] w-8 bg-[#F8D501] shrink-0" aria-hidden="true" />
                 <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#F8D501] font-bold bg-[#0B1B42] px-3 py-1">
@@ -395,7 +654,10 @@ export default function App() {
             </div>
 
             {/* Right Editorial Narrative + 4 Numbered Pillars in Crisp White-Navy-Gold Cards */}
-            <div className="lg:col-span-8 bg-white/95 backdrop-blur-md p-8 sm:p-10 border-t-4 border-t-[#F8D501] border-x-2 border-b-2 border-[#0B1B42]/20 shadow-md">
+            <div
+              data-mission-card
+              className="lg:col-span-8 bg-white/95 backdrop-blur-md p-8 sm:p-10 border-t-4 border-t-[#F8D501] border-x-2 border-b-2 border-[#0B1B42]/20 shadow-md"
+            >
               <p className="text-[16px] sm:text-[17px] leading-[1.8] text-[#0F2352] font-medium mb-12">
                 {MISSION_INTRO}
               </p>
@@ -404,10 +666,14 @@ export default function App() {
                 {MISSION_PILLARS.map((pillar) => (
                   <div
                     key={pillar.index}
+                    data-mission-pillar
                     className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 py-7 items-start hover:bg-[#F4F7FC] transition-colors px-2 -mx-2"
                   >
                     <div className="sm:col-span-1 pt-0.5">
-                      <span className="inline-flex items-center justify-center bg-[#F8D501] text-[#0B1B42] font-mono text-[12px] font-extrabold px-2 py-0.5 border border-[#0B1B42]/25 tabular-nums">
+                      <span
+                        data-pillar-badge
+                        className="inline-flex items-center justify-center bg-[#F8D501] text-[#0B1B42] font-mono text-[12px] font-extrabold px-2 py-0.5 border border-[#0B1B42]/25 tabular-nums"
+                      >
                         {pillar.index}
                       </span>
                     </div>
@@ -452,7 +718,10 @@ export default function App() {
             </div>
 
             {/* 3x3 Crisp Bordered Grid */}
-            <div className="border-t-4 border-t-[#0B1B42] border-x-2 border-b-2 border-[#0B1B42]/20 bg-white backdrop-blur-sm shadow-md">
+            <div
+              data-work-grid
+              className="border-t-4 border-t-[#0B1B42] border-x-2 border-b-2 border-[#0B1B42]/20 bg-white backdrop-blur-sm shadow-md"
+            >
               <div className="grid grid-cols-1 md:grid-cols-3">
                 {SELECTED_WORK.map((project, index) => {
                   const isLastRowDesktop = index >= 6;
@@ -461,8 +730,9 @@ export default function App() {
                     <button
                       key={project.id}
                       type="button"
+                      data-work-card
                       onClick={() => setSelectedProject(project)}
-                      className={`group text-left p-8 md:p-9 min-h-[220px] flex flex-col justify-between transition-all duration-150 hover:bg-[#FFFDF0] focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#0B1B42] ${
+                      className={`group text-left p-8 md:p-9 min-h-[220px] flex flex-col justify-between transition-all duration-200 hover:bg-[#FFFDF0] focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#0B1B42] ${
                         !isLastItemMobile ? 'border-b border-[#0B1B42]/15' : ''
                       } ${isLastRowDesktop ? 'md:border-b-0' : ''} ${
                         index % 3 !== 2 ? 'md:border-r md:border-[#0B1B42]/15' : ''
@@ -517,18 +787,23 @@ export default function App() {
           id="approach"
           className="mx-auto max-w-[1240px] px-6 md:px-10 py-24 md:py-28"
         >
-          <div className="flex items-center gap-3.5 mb-12">
+          <div className="flex items-center gap-3.5 mb-8">
             <span className="h-[3px] w-8 bg-[#F8D501] shrink-0" aria-hidden="true" />
             <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#F8D501] font-bold bg-[#0B1B42] px-3 py-1">
               APPROACH
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="h-[3px] w-full bg-[#0B1B42]/10 mb-8 overflow-hidden">
+            <div data-approach-line className="h-full w-full bg-[#F8D501]" />
+          </div>
+
+          <div data-approach-grid className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {APPROACH_STEPS.map((step, idx) => (
               <div
                 key={step.kicker}
-                className="border-t-4 border-t-[#F8D501] bg-white/95 backdrop-blur-sm p-8 border-x-2 border-b-2 border-[#0B1B42]/20 shadow-sm hover:border-[#0B1B42] transition-all"
+                data-approach-card
+                className="border-t-4 border-t-[#F8D501] bg-white/95 backdrop-blur-sm p-8 border-x-2 border-b-2 border-[#0B1B42]/20 shadow-sm hover:border-[#0B1B42] hover:-translate-y-1 transition-all"
               >
                 <div className="inline-flex items-center gap-2 bg-[#0B1B42] text-[#F8D501] px-2.5 py-1 font-mono text-[10px] tracking-[0.18em] uppercase font-bold">
                   <span>0{idx + 1} · {step.kicker}</span>
@@ -548,19 +823,27 @@ export default function App() {
         <FaqAccordion />
 
         {/* Senior Leadership & Editorial Quote Section with IDM Official Crest */}
-        <section className="mx-auto max-w-[1240px] px-6 md:px-10 pb-24 md:pb-28">
+        <section
+          data-leadership-section
+          className="mx-auto max-w-[1240px] px-6 md:px-10 pb-24 md:pb-28"
+        >
           <div className="border-t-4 border-t-[#F8D501] border-x-2 border-b-2 border-[#0B1B42]/20 bg-white/95 backdrop-blur-md py-14 md:py-18 px-8 sm:px-12 shadow-md">
-            <div className="flex justify-center mb-6">
-              <BrandLogo variant="light" size="lg" />
+            <div data-leader-header>
+              <div className="flex justify-center mb-6">
+                <BrandLogo variant="light" size="lg" />
+              </div>
+              <blockquote className="mx-auto max-w-[760px] text-center">
+                <p className="font-serif text-[26px] sm:text-[34px] font-normal leading-[1.32] text-[#0B1B42] text-balance">
+                  {SITE_INFO.founderQuote}
+                </p>
+              </blockquote>
             </div>
-            <blockquote className="mx-auto max-w-[760px] text-center">
-              <p className="font-serif text-[26px] sm:text-[34px] font-normal leading-[1.32] text-[#0B1B42] text-balance">
-                {SITE_INFO.founderQuote}
-              </p>
-            </blockquote>
 
             {/* Senior Leadership Duo Grid */}
-            <div className="mt-12 pt-10 border-t-2 border-[#0B1B42]/15 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[900px] mx-auto">
+            <div
+              data-leader-grid
+              className="mt-12 pt-10 border-t-2 border-[#0B1B42]/15 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[900px] mx-auto"
+            >
               {LEADERSHIP.map((leader) => {
                 const isSanvika = leader.name.toLowerCase().includes('sanvika');
                 const photoSrc = isSanvika ? '/sanvika-avatar.png' : '/founder-raghavendra.jpg';
@@ -568,6 +851,7 @@ export default function App() {
                 return (
                   <div
                     key={leader.name}
+                    data-leader-card
                     className="border-2 border-[#0B1B42]/20 bg-white p-6 flex flex-col justify-between shadow-sm hover:border-[#0B1B42] hover:shadow-lg transition-all text-left"
                   >
                     <div>

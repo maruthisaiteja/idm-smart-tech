@@ -1,16 +1,70 @@
+import { useRef } from 'react';
 import { CheckCircle2, XCircle } from 'lucide-react';
 import { IDM_VS_TRADITIONAL } from '../data/idmContent';
 import { BrandLogo } from './BrandLogo';
+import { gsap, useGSAP } from '../lib/gsapSetup';
 
 export function AgencyComparison() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add(
+        {
+          isDesktop: '(min-width: 1024px)',
+          isMobile: '(max-width: 1023px)',
+        },
+        (context) => {
+          const { isDesktop } = context.conditions as { isDesktop: boolean };
+
+          gsap.from('[data-comp-header]', {
+            y: 22,
+            opacity: 0,
+            duration: 0.65,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 90%',
+              once: true,
+            },
+          });
+
+          gsap.from('[data-comp-row]', {
+            x: isDesktop ? -18 : 0,
+            y: isDesktop ? 0 : 14,
+            opacity: 0,
+            duration: 0.55,
+            stagger: 0.06,
+            ease: 'power2.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: '[data-comp-matrix]',
+              start: 'top 88%',
+              once: true,
+            },
+          });
+        }
+      );
+
+      return () => mm.revert();
+    },
+    { scope: sectionRef }
+  );
+
   return (
     <section
+      ref={sectionRef}
       id="comparison"
       aria-label="IDM Smart Tech vs Traditional Agencies Comparison"
       className="mx-auto max-w-[1240px] px-6 md:px-10 py-24 md:py-28"
     >
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+      <div
+        data-comp-header
+        className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14"
+      >
         <div>
           <div className="flex items-center gap-3.5">
             <span className="h-[3px] w-8 bg-[#F8D501] shrink-0" aria-hidden="true" />
@@ -35,7 +89,10 @@ export function AgencyComparison() {
       </div>
 
       {/* Comparison Matrix Card */}
-      <div className="border-2 border-[#0B1B42]/25 bg-white/95 backdrop-blur-md shadow-lg overflow-hidden">
+      <div
+        data-comp-matrix
+        className="border-2 border-[#0B1B42]/25 bg-white/95 backdrop-blur-md shadow-lg overflow-hidden"
+      >
         {/* Table Column Titles (Desktop) — Royal Navy Banner with Official IDM Logo */}
         <div className="hidden md:grid md:grid-cols-12 gap-4 border-b-2 border-[#F8D501] bg-[#0B1B42] px-8 py-4.5 text-[11.5px] font-mono tracking-[0.14em] uppercase items-center">
           <div className="md:col-span-3 text-slate-200 font-bold whitespace-nowrap">CRITICAL METRIC</div>
@@ -54,6 +111,7 @@ export function AgencyComparison() {
           {IDM_VS_TRADITIONAL.map((item, idx) => (
             <div
               key={idx}
+              data-comp-row
               className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 p-6 sm:p-7 md:px-8 md:py-6 items-start hover:bg-[#FFFDF2] transition-colors"
             >
               {/* Factor Dimension */}

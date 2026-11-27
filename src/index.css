@@ -19,14 +19,14 @@
     font-family: var(--font-sans);
     background-color: #F4F7FC;
     color: #0B1B42;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   body {
     background-color: transparent;
     color: #0B1B42;
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   button:not(:disabled),

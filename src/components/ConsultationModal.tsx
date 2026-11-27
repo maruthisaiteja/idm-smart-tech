@@ -63,6 +63,7 @@ export function ConsultationModal({
 
   return (
     <div
+      data-lenis-prevent
       className="fixed inset-0 z-50 flex items-center justify-center bg-[#071330]/70 p-4 backdrop-blur-[2px] overflow-y-auto"
       role="dialog"
       aria-modal="true"

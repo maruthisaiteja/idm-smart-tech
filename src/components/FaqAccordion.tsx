@@ -1,23 +1,61 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ChevronDown, MessageCircle, HelpCircle } from 'lucide-react';
 import { FAQS } from '../data/idmContent';
+import { gsap, ScrollTrigger, useGSAP } from '../lib/gsapSetup';
 
 export function FaqAccordion() {
   const [openId, setOpenId] = useState<string | null>(FAQS[0]?.id || null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      gsap.from('[data-faq-left]', {
+        y: 22,
+        opacity: 0,
+        duration: 0.65,
+        ease: 'power3.out',
+        clearProps: 'transform,opacity',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 90%',
+          once: true,
+        },
+      });
+
+      gsap.from('[data-faq-item]', {
+        y: 18,
+        opacity: 0,
+        duration: 0.55,
+        stagger: 0.06,
+        ease: 'power2.out',
+        clearProps: 'transform,opacity',
+        scrollTrigger: {
+          trigger: '[data-faq-list]',
+          start: 'top 90%',
+          once: true,
+        },
+      });
+    },
+    { scope: sectionRef }
+  );
 
   const toggleItem = (id: string) => {
     setOpenId((prev) => (prev === id ? null : id));
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
   };
 
   return (
     <section
+      ref={sectionRef}
       id="faq"
       aria-label="Frequently Asked Questions"
       className="mx-auto max-w-[1240px] px-6 md:px-10 py-24 md:py-28"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
         {/* Left Column: Title & Context */}
-        <div className="lg:col-span-4">
+        <div data-faq-left className="lg:col-span-4">
           <div className="flex items-center gap-3.5">
             <span className="h-[3px] w-8 bg-[#F8D501] shrink-0" aria-hidden="true" />
             <span className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[#F8D501] font-bold bg-[#0B1B42] px-3 py-1">
@@ -57,11 +95,14 @@ export function FaqAccordion() {
         </div>
 
         {/* Right Column: Interactive Accordion */}
-        <div className="lg:col-span-8 border-2 border-[#0B1B42]/20 bg-white/95 backdrop-blur-md shadow-md divide-y divide-[#0B1B42]/15">
+        <div
+          data-faq-list
+          className="lg:col-span-8 border-2 border-[#0B1B42]/20 bg-white/95 backdrop-blur-md shadow-md divide-y divide-[#0B1B42]/15"
+        >
           {FAQS.map((faq, index) => {
             const isOpen = openId === faq.id;
             return (
-              <div key={faq.id} className="transition-colors">
+              <div key={faq.id} data-faq-item className="transition-colors">
                 <button
                   type="button"
                   onClick={() => toggleItem(faq.id)}

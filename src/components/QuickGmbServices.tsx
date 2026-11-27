@@ -1,24 +1,92 @@
+import { useRef } from 'react';
 import { MessageCircle, Clock, ShieldCheck, ArrowUpRight, Zap } from 'lucide-react';
 import { POPULAR_GMB_SERVICES, type GmbServiceItem } from '../data/idmContent';
+import { gsap, useGSAP } from '../lib/gsapSetup';
 
 interface QuickGmbServicesProps {
   onOpenConsultation?: (serviceName: string) => void;
 }
 
 export function QuickGmbServices({ onOpenConsultation }: QuickGmbServicesProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add(
+        {
+          isDesktop: '(min-width: 1024px)',
+          isMobile: '(max-width: 1023px)',
+        },
+        (context) => {
+          const { isDesktop } = context.conditions as { isDesktop: boolean };
+          const yOffset = isDesktop ? 32 : 16;
+
+          gsap.from('[data-gmb-header]', {
+            y: 22,
+            opacity: 0,
+            duration: 0.65,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 90%',
+              once: true,
+            },
+          });
+
+          gsap.from('[data-gmb-card]', {
+            y: yOffset,
+            scale: 0.97,
+            opacity: 0,
+            duration: 0.65,
+            stagger: 0.1,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: '[data-gmb-grid]',
+              start: 'top 90%',
+              once: true,
+            },
+          });
+
+          gsap.from('[data-gmb-seal]', {
+            y: 18,
+            opacity: 0,
+            duration: 0.6,
+            ease: 'power2.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: '[data-gmb-seal]',
+              start: 'top 95%',
+              once: true,
+            },
+          });
+        }
+      );
+
+      return () => mm.revert();
+    },
+    { scope: sectionRef }
+  );
+
   const getWhatsAppHref = (item: GmbServiceItem) => {
     return `https://wa.me/918519837818?text=${encodeURIComponent(item.whatsappMessage)}`;
   };
 
   return (
     <section
+      ref={sectionRef}
       id="gmb-services"
       aria-label="Google Business Profile Quick Services"
       className="w-full border-b-2 border-[#0B1B42]/15 bg-transparent py-20 md:py-24"
     >
       <div className="mx-auto max-w-[1240px] px-6 md:px-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div
+          data-gmb-header
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12"
+        >
           <div>
             <div className="flex items-center gap-3">
               <span className="h-[3px] w-8 bg-[#F8D501] shrink-0" aria-hidden="true" />
@@ -44,10 +112,11 @@ export function QuickGmbServices({ onOpenConsultation }: QuickGmbServicesProps) 
         </div>
 
         {/* 4-Column Grid of High-Converting Brand Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div data-gmb-grid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {POPULAR_GMB_SERVICES.map((item) => (
             <div
               key={item.id}
+              data-gmb-card
               className="group relative flex flex-col justify-between border-t-4 border-t-[#F8D501] border-x-2 border-b-2 border-[#0B1B42]/20 bg-white/95 backdrop-blur-md p-6 shadow-sm transition-all duration-300 hover:border-[#0B1B42] hover:border-t-[#F8D501] hover:shadow-2xl hover:-translate-y-1.5"
             >
               {/* Card Header & Badge */}
@@ -122,7 +191,10 @@ export function QuickGmbServices({ onOpenConsultation }: QuickGmbServicesProps) 
         </div>
 
         {/* Bottom Trust Guarantee Strip with Official IDM Seal */}
-        <div className="mt-10 border-2 border-[#0B1B42]/20 bg-white/95 backdrop-blur-md p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[13px] text-[#0B1B42] shadow-sm">
+        <div
+          data-gmb-seal
+          className="mt-10 border-2 border-[#0B1B42]/20 bg-white/95 backdrop-blur-md p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[13px] text-[#0B1B42] shadow-sm"
+        >
           <div className="flex items-center gap-3">
             <img
               src="/idm-logo.png"

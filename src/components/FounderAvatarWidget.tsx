@@ -1,6 +1,8 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useLenis } from 'lenis/react';
 import { X, MessageCircle, Phone, CheckCircle2, Send, ShieldCheck } from 'lucide-react';
 import { SITE_INFO } from '../data/idmContent';
+import { gsap, useGSAP } from '../lib/gsapSetup';
 
 interface FounderAvatarWidgetProps {
   onOpenConsultation?: (topic?: string) => void;
@@ -23,6 +25,32 @@ export function FounderAvatarWidget({ onOpenConsultation }: FounderAvatarWidgetP
   const [isHovered, setIsHovered] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const avatarRef = useRef<HTMLDivElement>(null);
+  const launcherRef = useRef<HTMLElement>(null);
+  const lenis = useLenis();
+
+  // Pause Lenis scroll cleanly while concierge drawer is open
+  useEffect(() => {
+    if (!lenis || !isOpen) return;
+    lenis.stop();
+    return () => {
+      lenis.start();
+    };
+  }, [lenis, isOpen]);
+
+  // Smooth spring entrance for floating Bantaram Sanvika disc & prompt pill
+  useGSAP(
+    () => {
+      gsap.from(launcherRef.current, {
+        y: 26,
+        opacity: 0,
+        duration: 0.7,
+        delay: 0.75,
+        ease: 'back.out(1.4)',
+        clearProps: 'transform,opacity',
+      });
+    },
+    { scope: launcherRef }
+  );
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!avatarRef.current) return;
@@ -59,6 +87,7 @@ export function FounderAvatarWidget({ onOpenConsultation }: FounderAvatarWidgetP
     <>
       {/* Floating Trigger Layer: Bottom-Right */}
       <aside
+        ref={launcherRef}
         aria-label="Contact Founder & Operations Lead"
         className="fixed bottom-6 right-5 sm:bottom-8 sm:right-8 z-50 flex items-center gap-3 select-none"
       >
@@ -144,6 +173,7 @@ export function FounderAvatarWidget({ onOpenConsultation }: FounderAvatarWidgetP
           onClick={() => setIsOpen(false)}
         >
           <div
+            data-lenis-prevent
             onClick={(e) => e.stopPropagation()}
             className="w-full sm:w-[420px] max-h-[90vh] overflow-y-auto border-2 border-[#0B1B42] border-t-4 border-t-[#F8D501] bg-white shadow-2xl text-[#0B1B42] animate-in fade-in slide-in-from-bottom-5 duration-300"
           >

@@ -34,6 +34,7 @@ export function CaseStudyModal({
       onClick={onClose}
     >
       <div
+        data-lenis-prevent
         className="relative my-auto w-full max-w-[640px] max-h-[88dvh] overflow-y-auto border-2 border-[#0B1B42] border-t-4 border-t-[#F8D501] bg-white p-6 sm:p-10 text-[#0B1B42] shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >

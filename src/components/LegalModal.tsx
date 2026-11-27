@@ -33,6 +33,7 @@ export function LegalModal({ tab, onClose }: LegalModalProps) {
       onClick={onClose}
     >
       <div
+        data-lenis-prevent
         className="w-full max-w-[560px] max-h-[88dvh] overflow-y-auto border-2 border-[#0B1B42] border-t-4 border-t-[#F8D501] bg-white p-6 sm:p-8 text-[#0B1B42] shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
